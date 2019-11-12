@@ -4,7 +4,7 @@ import time
 from bs4 import BeautifulSoup
 
 url_base = 'https://www.nulled.to/topic/'
-url_extra = '830359-trengods-refunding-service-cheapest-rates-fast-quick-communication-worldwide/page-4'
+url_extra = '777237-★fuckkikis-high-end-refund-service★lenovo-microsoft-qvc-best-buy-google-oneplus-and-many-more★/page-4'
 response = requests.get(url_base + url_extra)
 soup = BeautifulSoup(response.text, "html.parser")
 print(soup.prettify())
