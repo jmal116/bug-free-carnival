@@ -14,6 +14,7 @@
 
 import os, sys
 import csv
+import re
 from os.path import isdir, join
 from bs4 import BeautifulSoup
 
@@ -29,6 +30,13 @@ thread_fields = ["Thread ID", "Thread Link", "Market", "Vendor Name", "Product/S
 comment_data = "commentData.csv"
 comment_fields = ["Thread ID", "Comment Link", "Floor Number", "Username", "Trade", "Review", "Q&A", "Content"]
 
+def get_author(post):
+    return post.find("div", "post_username").find("span", {"class": "author vcard"}).text.strip()
+
+def format_text(comment):
+    comment = comment.replace('\n', ' ').replace('\t', ' ').strip()
+    return re.sub(r'\s+', ' ', comment)
+
 thread_id = 0
 
 with open(thread_data, 'w') as threads, open(comment_data, 'w') as comments:
@@ -42,16 +50,21 @@ with open(thread_data, 'w') as threads, open(comment_data, 'w') as comments:
             for page in os.listdir(join(data_root_path, category, thread)):
                 with open(join(data_root_path, category, thread, page), 'r') as p:
                     soup = BeautifulSoup(p, "html.parser")
+                    comment_list = soup.findAll("div", {"class": "post_body"})
                     if page == "page-1.html":
-                        # get product/service name with soup -- <title> tag
-                        # get OP by finding the username of the first comment
-                        ### soup.findAll(div, {"class": "post_wrap"})[0]
+                        post_title = soup.head.title.text.strip()
+                        original_post = comment_list[0]
+                        author = get_author(original_post)
                         page_url = thread_url + "/#"
-                        thread_writer.writerow({"Thread ID": thread_id, "Thread Link": page_url, "Market": market, "Vendor Name": "DERIVE", "Product/Service Name": "DERIVE", "Replies": "MANUAL", "Views": "MANUAL", "Category": category, "Price": "MANUAL", "Unit": "MANUAL", "Payment Method": "MANUAL"})
+
+                        thread_writer.writerow({"Thread ID": thread_id, "Thread Link": page_url, "Market": market, "Vendor Name": author, "Product/Service Name": post_title, "Replies": "MANUAL", "Views": "MANUAL", "Category": category, "Price": "MANUAL", "Unit": "MANUAL", "Payment Method": "MANUAL"})
                     else:
                         page_url = thread_url + "/" + page[:-5]
-                    comments = [] # use soup.findAll for class="post_wrap"
-                    for comment in comments:
-                        comment_writer.writerow({"Thread ID": thread_id, "Comment Link": page_url, "Floor Number": "DERIVED", "Username": "DERIVED", "Trade": "MANUAL", "Review": "MANUAL", "Q&A": "MANUAL", "Content": "DERIVED"})
-                    pass
+
+                    for comment in comment_list:
+                        comment_number = comment.find("span", {"class": "post_id"}).a.text.strip()[1:]
+                        commenter = get_author(comment)
+                        post_text = format_text(comment.find("section").text) # need to format, look into str.replace('\n', '')
+                        #print(post_text)
+                        comment_writer.writerow({"Thread ID": thread_id, "Comment Link": page_url, "Floor Number": comment_number, "Username": commenter, "Trade": "0", "Review": "0", "Q&A": "0", "Content": post_text})
             thread_id += 1
