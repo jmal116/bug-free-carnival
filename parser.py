@@ -28,7 +28,7 @@ thread_data = "threadData.csv"
 thread_fields = ["Thread ID", "Thread Link", "Market", "Vendor Name", "Product/Service Name", "Replies", "Views", "Category", "Price", "Unit", "Payment Method"]
 
 comment_data = "commentData.csv"
-comment_fields = ["Thread ID", "Comment Link", "Floor Number", "Username", "Trade", "Review", "Q&A", "Content"]
+comment_fields = ["Thread ID", "Comment Link", "Floor Number", "Username", "Trade", "Review", "Q&A", "Self-Promotion", "Content"]
 
 def get_author(post):
     return post.find("div", "post_username").find("span", {"class": "author vcard"}).text.strip()
@@ -66,5 +66,5 @@ with open(thread_data, 'w') as threads, open(comment_data, 'w') as comments:
                         commenter = get_author(comment)
                         post_text = format_text(comment.find("section").text) # need to format, look into str.replace('\n', '')
                         #print(post_text)
-                        comment_writer.writerow({"Thread ID": thread_id, "Comment Link": page_url, "Floor Number": comment_number, "Username": commenter, "Trade": "0", "Review": "0", "Q&A": "0", "Content": post_text})
+                        comment_writer.writerow({"Thread ID": thread_id, "Comment Link": page_url, "Floor Number": comment_number, "Username": commenter, "Trade": "0", "Review": "0", "Q&A": "0", "Self-Promotion": "0", "Content": post_text})
             thread_id += 1
