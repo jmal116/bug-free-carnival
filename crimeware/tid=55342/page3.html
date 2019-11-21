@@ -1,0 +1,2252 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>Host Booting / DDoSing Tutorial - Page 3</title>
+
+
+<script type="text/javascript" async="" src="page3_files/analytics.js"></script><script src="page3_files/35rBZAZ85dfbRgEGk2rLAi1oAAg.js"></script><script src="page3_files/js.js"></script><link rel="canonical" href="https://hackforums.net/showthread.php?tid=55342&amp;page=3">
+<meta name="description" content="Botnets, IRC Bots, and Zombies-Host Booting / DDoSing Tutorial - Page 3">
+<meta name="keywords" content="forum,forums,exploits,hacks, hacking,security,coding,computer,bitcoin,hosting,ethereum,facebook,twitter,hacker,hack,keyloggers,tools,scripts,bugs,bug bounty">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="theme-color" content="#333333">
+
+<link rel="alternate" type="application/rss+xml" title="Latest Threads (RSS 2.0)" href="https://hackforums.net/syndication.php">
+<link rel="alternate" type="application/atom+xml" title="Latest Threads (Atom 1.0)" href="https://hackforums.net/syndication.php?type=atom1.0">
+<link type="text/css" rel="stylesheet" href="page3_files/global.css">
+<link type="text/css" rel="stylesheet" href="page3_files/response.css">
+<link type="text/css" rel="stylesheet" href="page3_files/showthread.css">
+<link type="text/css" rel="stylesheet" href="page3_files/award.css">
+<link type="text/css" rel="stylesheet" href="page3_files/notify_2.css">
+<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BreadcrumbList",
+		  "itemListElement": [{
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Hack Forums",
+		"item": "https://hackforums.net/index.php"
+	  },{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Hacks, Exploits, and Various Discussions",
+		"item": "https://hackforums.net/forumdisplay.php?fid=45"
+	  },{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "Advanced Hacking",
+		"item": "https://hackforums.net/forumdisplay.php?fid=307"
+	  },{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "Botnets, IRC Bots, and Zombies",
+		"item": "https://hackforums.net/forumdisplay.php?fid=92"
+	  },{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "Host Booting / DDoSing Tutorial",
+		"item": "https://hackforums.net/showthread.php?tid=55342"
+	  }]
+		}
+	</script>
+<script src="page3_files/jquery.js"></script>
+<script src="page3_files/jquery_002.js"></script>
+<script src="page3_files/general.js"></script>
+<script src="page3_files/response.js" defer="defer"></script>
+<script src="page3_files/util_2.js"></script>
+<link rel="stylesheet" type="text/css" href="page3_files/font-awesome.css">
+<script type="text/javascript">
+    lang.unknown_error = "An unknown error has occurred.";
+    lang.select2_match = "One result is available, press enter to select it.";
+    lang.select2_matches = "{1} results are available, use up and down arrow keys to navigate.";
+    lang.select2_nomatches = "No matches found";
+    lang.select2_inputtooshort_single = "Please enter one or more character";
+    lang.select2_inputtooshort_plural = "Please enter {1} or more characters";
+    lang.select2_inputtoolong_single = "Please delete one character";
+    lang.select2_inputtoolong_plural = "Please delete {1} characters";
+    lang.select2_selectiontoobig_single = "You can only select one item";
+    lang.select2_selectiontoobig_plural = "You can only select {1} items";
+    lang.select2_loadmore = "Loading more results…";
+    lang.select2_searching = "Searching…";
+    var cookieDomain = "hackforums.net";
+    var cookiePath = "/";
+    var cookiePrefix = "";
+    var cookieSecureFlag = "1";
+    var deleteevent_confirm = "Are you sure you want to delete this event?";
+    var removeattach_confirm = "Are you sure you want to remove the selected attachment from this post?";
+    var loading_text = 'Loading. <br />Please Wait..';
+    var saving_changes = 'Saving changes..';
+    var use_xmlhttprequest = "1";
+    var my_post_key = "01ce07b2d23227f1c6a1c694d6e27f8e";
+    var rootpath = "https://hackforums.net";
+    var imagepath = "https://hackforums.net/images/mobale";
+     var yes_confirm = "Yes";
+    var no_confirm = "No";
+    var MyBBEditor = null;
+    var spinner_image = "https://hackforums.net/images/mobale/spinner_big.gif";
+    var spinner = "<img src='" + spinner_image +"' alt='' style='display: none' />";
+    var modal_zindex = 999999;
+    var unread_pms = parseInt(1);
+    var unread_alerts = parseInt();
+    var nodeID = "689814cab85ed0a8b1fbd7fe7b521acfad2db44a4a2282c90acb475bfbe4fc6b";
+    var socket_uid = 4466395;
+    var socket_url_base = "https://hackforums.net";
+</script>
+<script src="page3_files/socket.js"></script>
+
+
+<script type="text/javascript">
+<!--
+	var quickdelete_confirm = "Are you sure you want to delete this post?";
+	var quickrestore_confirm = "Are you sure you want to restore this post?";
+	var allowEditReason = "1";
+	lang.save_changes = "Save Changes";
+	lang.cancel_edit = "Cancel Edit";
+	lang.quick_edit_update_error = "There was an error editing your reply:";
+	lang.quick_reply_post_error = "There was an error posting your reply:";
+	lang.quick_delete_error = "There was an error deleting your reply:";
+	lang.quick_delete_success = "The post was deleted successfully.";
+	lang.quick_delete_thread_success = "The thread was deleted successfully.";
+	lang.quick_restore_error = "There was an error restoring your reply:";
+	lang.quick_restore_success = "The post was restored successfully.";
+	lang.editreason = "Edit Reason";
+// -->
+</script>
+<!-- jeditable (jquery) -->
+<script type="text/javascript" src="page3_files/report.js"></script>
+<script src="page3_files/jeditable.js"></script>
+<script type="text/javascript" src="page3_files/thread.js"></script>
+<link rel="stylesheet" href="page3_files/select2.css">
+</head>
+<body>
+	
+<div id="mySidenav" class="sidenav">
+	<button class="accordion"><div style="display: inline-block; width: 50%;"><span class="accordion-icon"><i class="fa fa-folder" aria-hidden="true"></i></span>Navigation</div><div style="display: inline-block; padding-left: 80px; vertical-align: middle;"><i class="fa fa-angle-down"></i></div></button>
+	<div class="panel">
+		<a href="https://hackforums.net/upgrade.php"><i class="fa fa-diamond fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Upgrade</a>
+		<a href="https://hackforums.net/search.php"><i class="fa fa-search fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Search</a>
+		<a href="https://hackforums.net/memberlist.php"><i class="fa fa-users fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Memberlist</a>
+		<a href="https://hackforums.net/extras.php"><i class="fa fa-list fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Extras</a>
+		<a href="https://hackforums.net/tools.php"><i class="fa fa-wrench fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Tools</a>
+		<a href="https://hackforums.net/awardgoals.php"><i class="fa fa-trophy fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Award Goals</a>
+		<a href="https://hackforums.net/misc.php?action=help"><i class="fa fa-info-circle fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Help</a>
+		<a href="https://twitter.com/hackforumsnet"><i class="fa fa-twitter fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Follow</a>
+		<a href="https://hackforums.net/contact.php"><i class="fa fa-envelope-o fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Contact</a>
+	</div>
+<span class="panel_spacer"></span></div>
+<div id="container">
+		<a name="top" id="top"></a>
+		<div id="header">
+			<div id="logo" style="position: relative;">
+				<div id="notify-container" style="display: none;">
+					<div id="notify-dragger" class="notify-header" style="background-color: #454545;"><span class="notify-header-heading" style="font-size: 16px;">Notifications</span><div class="float_right"><a href="https://hackforums.net/notify.php"><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="Notify.processIconClick();" style="margin-left: 15px;"><i class="fa fa-times-circle fa-lg" aria-hidden="true"></i></a></div></div>
+					<div id="notify-notifications-container"><div class="notify-header"><span class="notify-header-heading">Viewed</span></div>
+			<div class="notify-notice-container notify-notice-container-read">
+				<div class="notify-notice-avatar-container">
+					<div class="notify-notice-avatar" title="Omniscient"><a href="https://hackforums.net/member.php?action=profile&amp;uid=1"><img src="page3_files/avatar_1.png" alt="" width="36" height="36"></a></div>
+				</div>
+				<a href="https://hackforums.net/private.php?action=read&amp;pmid=86676852" style="display: block; width: 100%;">
+					<div class="notify-notice-details-container">
+						<div style="margin-top: -2px;"><span class="tinytext" style="color: #888;"><span class="smart-time" data-timestamp="1573325001" title="Sat Nov 09 2019, 1:43 PM">11 days ago</span></span></div>
+						<div style="margin-top: 2px;"><span style="display: block; overflow: hidden; color: #ababab;"><strong class="group4">Omniscient</strong> sent you a private message titled <strong style="color: #ddd;">Welcome Fanny Ye to Hack Forums</strong>.</span></div>
+					</div>
+				</a>
+			</div>
+
+					</div>
+				</div>
+				<div class="wrapper">
+					<a href="https://hackforums.net/index.php"><img src="page3_files/logo-circuit-green.gif" class="logo-img" title="Hack Forums" alt="Hackforums"></a> 
+					<ul class="menu top-links">
+					<li><a href="https://hackforums.net/" title="Home" data-tooltip="Home"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/upgrade.php" title="Upgrade" data-tooltip="Upgrade"><i class="fa fa-diamond fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/search.php" data-tooltip="Search" onclick="$('#quick_search').modal({ fadeDuration: 150, keepelement: true, zIndex: (typeof modal_zindex !== 'undefined' ? modal_zindex : 9999) }); return false;" class="search" title="Search"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>
+					<div class="modal-search" id="quick_search" style="display: none;">
+					<form method="post" action="https://hackforums.net/search.php">
+						<input type="hidden" name="action" value="do_search">
+						<input type="hidden" name="postthread" value="0">
+                				<input type="hidden" name="nomodal" value="1">
+						<table class="tborder" width="100%" cellspacing="0" cellpadding="5" border="0">
+							<tbody><tr>
+								<td class="thead" colspan="2"><strong>Search</strong><span class="smalltext float_right"><a href="https://hackforums.net/search.php">Advanced Search</a></span></td>
+							</tr>
+							<tr>
+								<td class="trow1" width="25%"><strong>Keywords</strong></td>
+								<td class="trow1"><input name="keywords" id="quick_keyword" type="text" class="textbox initial_focus"></td>
+							</tr>
+
+
+							<tr>
+								<td class="trow2" colspan="2">
+									<div class="tcenter"><input name="submit" type="submit" class="button" value="Submit"></div>
+								</td>
+							</tr>
+						</tbody></table>
+					</form>
+				</div>
+				<script type="text/javascript">
+					$("#quick_search input[name='url']").val($(location).attr('href'));
+				</script>
+</li>
+					<li><a href="https://hackforums.net/memberlist.php" title="Memberlist" data-tooltip="Memberlist"><i class="fa fa-users fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/extras.php" title="Extra Pages" data-tooltip="Extra Pages"><i class="fa fa-list fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/tools.php" title="Hacker Tools" data-tooltip="Hacker Tools"><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/awardgoals.php" title="Award Goals" data-tooltip="Award Goals"><i class="fa fa-trophy fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/misc.php?action=help" title="Help" data-tooltip="Help Docs"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://twitter.com/hackforumsnet" title="Follow our Twitter" data-tooltip="Twitter"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/contact.php" title="Contact Us" data-tooltip="Contact Us"><i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+		</div>			
+		<div id="panel">
+				<div class="upper">
+					<div class="wrapper">
+						<div class="oc-time">11-21-2019 12:30 AM</div>
+						
+<span class="welcome"><strong>Welcome back, <a href="https://hackforums.net/member.php?action=profile&amp;uid=4466395">Fanny Ye</a></strong>. You last visited: <span title="{1}">Yesterday</span>, 10:46 PM </span>
+</div>
+</div>
+<div class="quickthread_button">
+	<a href="https://hackforums.net/quickthread.php" title="Start a New Thread" rel="nofollow">
+		<i class="fa fa-pencil-square-o fa-lg"></i>
+	</a>
+</div>
+<div class="lower panel-nav-lower mobile-remove">
+	<div class="wrapper">
+		<ul class="menu panel_links">
+                        
+<li><a href="https://hackforums.net/usercp.php" class="usercp" title="User Control Panel" data-tag="User CP" data-tooltip="User CP"><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a></li>
+
+                        <li><a href="https://hackforums.net/marketcp.php" class="marketcp" title="Market Control Panel" data-tag="Market CP" data-tooltip="Market CP"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i></a></li>
+			<li class="button-dropdown" style="top: 2px; margin-right: 5px;">
+				<a href="javascript:void(0)" class="dropdown-toggle">
+					<i class="fa fa-gamepad" aria-hidden="true"></i> <span>▼</span>
+				</a>
+				<ul class="dropdown-menu" style="position: absolute; padding-left: 0px; left: -19px; text-align: left; background-color: #060606; top: 21px; display: none; width: 200px; z-index: 999;">
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/gamecp.php" class="usercp" title="Hack Game"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Hack Game</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/lottery.php" class="usercp" title="Lottery"><i class="fa fa-ticket fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Lottery</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/scratchcard.php" class="usercp" title="Scratchcards"><i class="fa fa-clone fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Scratchcards</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/sportsbook.php" class="usercp" title="Sportsbook"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Sportsbook</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/blackjack.php" class="usercp" title="Blackjack"><i class="fa fa-money fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Blackjack</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/slots.php" class="usercp" title="Slots"><i class="fa fa-bomb fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Slots</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/cryptogame.php" class="usercp" title="Crypto Game"><i class="fa fa-btc fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Crypto Game</span></a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="javascript:void(0);" class="notifycp" title="Notifications" data-tag="Notifications" onclick="Notify.processIconClick();"><i class="fa fa-bell fa-lg" aria-hidden="true"></i><span class="notify-num" id="notify_number_notify">0</span></a>
+			</li>
+			<li class=""><a href="https://hackforums.net/convo.php" title="Conversations" data-tag="Conversations" data-tooltip="Conversation"><i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i> (0)</a></li>
+			<li class="alerts--new"><a href="https://hackforums.net/private.php" title="Private Messages" data-tag="Private Messages" data-tooltip="Private Message"><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i> (1)</a></li>
+                        
+			
+		</ul>
+		<ul class="menu user_links">
+                      <li><a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/misc.php?action=buddypopup&amp;modal=1', null, true); return false;" title="Comrade List" data-tag="Comrade List" data-tooltip="Comrade List"><i class="fa fa-address-book-o fa-lg" aria-hidden="true"></i></a></li>
+			
+<li><a href="https://hackforums.net/search.php?action=getfavorites" title="Favorites" data-tag="Favorites" data-tooltip="Favorites"><i class="fa fa-heart fa-lg" aria-hidden="true"></i></a></li>
+<li><a href="https://hackforums.net/search.php?action=getnew" title="New Posts" data-tag="New Posts" data-tooltip="New Posts"><i class="fa fa-file-text fa-lg" aria-hidden="true"></i></a></li>
+<li><a href="https://hackforums.net/search.php?action=finduserthreads&amp;uid=4466395" title="Your Threads" data-tag="Your Threads" data-tooltip="Your Threads"><i class="fa fa-file-o fa-lg" aria-hidden="true"></i></a></li>
+<li><a href="https://hackforums.net/search.php?action=finduser&amp;uid=4466395" title="Your Posts" data-tag="Your Posts" data-tooltip="Your Posts"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a></li>
+
+			<li><a href="https://hackforums.net/blog.php" class="blogs" title="Blogs" data-tag="Blogs" data-tooltip="Blogs"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i></a></li>
+			<li class="user-link-last"><a href="https://hackforums.net/member.php?action=logout&amp;logoutkey=8daf18d0bae0944756cbb48b5c4d6875" class="logout" onclick="return confirm('Are you sure that you want to logout?');" title="Log Out" data-tag="Log Out" data-tooltip="Log out"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+	<br class="clear">
+</div>
+<div class="lower panel-nav-lower-mobile">
+<div class="wrapper">
+<ul class="nav">
+   <li class="button-dropdown">
+    <a href="javascript:void(0)" class="dropdown-toggle">
+      Control Panel <span>▼</span>
+    </a>
+    <ul class="dropdown-menu" style="text-align: left;">
+      <li><a href="https://hackforums.net/usercp.php" class="usercp" title="User Control Panel"><i class="fa fa-cog fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">User CP</span></a></li>
+					<li><a href="https://hackforums.net/marketcp.php" class="marketcp" title="Market Control Panel"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Market CP</span></a></li>
+					<li><a href="https://hackforums.net/gamecp.php" class="gamecp" title="Game Control Panel"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Game CP</span></a></li>
+	
+        
+    </ul>
+  </li>
+ <li class="button-dropdown alert-li-tablet mobile-remove"><ul></ul></li>
+ <li class="button-dropdown right">
+    <a href="javascript:void(0)" class="dropdown-toggle">Fanny Ye <span>▼</span></a>
+    <ul class="dropdown-menu right-menu" style="text-align: left;">
+			<li><a href="#" onclick="MyBB.popupWindow('https://hackforums.net/misc.php?action=buddypopup', null, true); return false;"><i class="fa fa-address-book-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Open Comrade List</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getfavorites"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Favorites</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getnew"><i class="fa fa-file-text fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">View New Posts</span></a></li>
+                        <li><a href="https://hackforums.net/search.php?action=finduserthreads&amp;uid=4466395"><i class="fa fa-file-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Your Threads</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=finduser&amp;uid=4466395"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Your Posts</span></a></li>
+			<li class=""><a href="https://hackforums.net/convo.php" title="Conversations"><i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Conversations</span> (0)</a></li>
+			<li class="user-link-last alerts--new"><a href="https://hackforums.net/private.php"><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Private Messages</span> (1)</a>
+			<div class="mobile-remove tablet-remove" style="display: inline;padding-left: 5px;">(Unread 1, Total 1)</div></li>
+            <li><a href="https://hackforums.net/member.php?action=logout&amp;logoutkey=8daf18d0bae0944756cbb48b5c4d6875" class="logout" onclick="return confirm('Are you sure that you want to logout?');"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Log Out</span></a></li>
+    </ul>
+  </li>
+	</ul></div>
+	<br class="clear">
+</div>
+</div></div><div><div class="navbar" id="myNavbar">
+	<a id="navBarAvatarLink" class="header_avatar" href="javascript:void(0);"><img src="page3_files/default_avatar.png" width="36" height="36"></a>
+	<div id="navHeaderProfileLinks" style="display: none; position: absolute;background-color: #060606;top: 51px;width: 100%;">
+		<div id="navLeftDropdownGroup" style=" display: flex; background-color: #141414; font-weight: bold;">
+			<div id="navLeftDropdownLink" class="nav-left-dropdown-option-active" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-user fa-lg" aria-hidden="true"></i></div>
+			<div id="navLeftDropdownControl" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></div>
+			<div id="navLeftDropdownGame" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i></div>
+			<div id="navLeftDropdownMarket" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i></div>
+		</div>
+		<ul id="navLeftDropdownLinkList" class="dropdown-menu nav-left-dropdown-option-list-active" style="text-align: center;padding: 0; margin: 0; display: none;">
+			<li><a href="https://hackforums.net/member.php?action=profile&amp;uid=4466395" class="usercp" title="My Profile"><i class="fa fa-user fa-lg" aria-hidden="true"></i><span>Profile</span></a></li>
+			<li><a href="https://hackforums.net/private.php" title="Read Your Private Messages"><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i><span>Private Messages <span id="mobileDropdownPMs"> (1)</span></span></a></li>
+			<li><a href="javascript:void(0);" title="Open Comrade List" onclick="MyBB.popupWindow('https://hackforums.net/misc.php?action=buddypopup', null, true); return false;"><i class="fa fa-address-book-o fa-lg" aria-hidden="true"></i><span>Comrades</span></a></li>
+			<li><a href="https://hackforums.net/usercp.php" class="usercp" title="User Control Panel"><i class="fa fa-cog fa-lg" aria-hidden="true"></i><span>Settings</span></a></li>
+			<li><a href="https://hackforums.net/upgrade.php" class="usercp" title="Upgrade"><i class="fa fa-diamond fa-lg" aria-hidden="true"></i><span>Upgrade</span></a></li>
+			<li><a href="https://hackforums.net/member.php?action=logout&amp;logoutkey=8daf18d0bae0944756cbb48b5c4d6875" onclick="return confirm('Are you sure that you want to logout?');" title="Log Out"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i><span>Log Out</span></a></li>
+		</ul>
+		<ul id="navLeftDropdownControlList" class="dropdown-menu" style="text-align: center;padding: 0;margin: 0; display: none;">
+			<li><a href="https://hackforums.net/quickthread.php" title="Create Thread"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i><span>Create Thread</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getnew" title="View New Posts"><i class="fa fa-file-text fa-lg" aria-hidden="true"></i><span>New Posts</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=finduserthreads&amp;uid=4466395" title="View Your Threads"><i class="fa fa-file-o fa-lg" aria-hidden="true"></i><span>Your Threads</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=finduser&amp;uid=4466395" title="View Your Posts"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i><span>Your Posts</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getfavorites" title="Search Favorites"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Favorites</span></a></li>
+			<li><a href="https://hackforums.net/blog.php" title="Blogs"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i><span>Blogs</span></a></li>
+		</ul>
+		<ul id="navLeftDropdownGameList" class="dropdown-menu" style="text-align: center;padding: 0;margin: 0; display: none;">
+			<li><a href="https://hackforums.net/gamecp.php" class="usercp" title="Hack Game"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i><span>Hack Game</span></a></li>
+			<li><a href="https://hackforums.net/lottery.php" class="usercp" title="Lottery"><i class="fa fa-ticket fa-lg" aria-hidden="true"></i><span>Lottery</span></a></li>
+			<li><a href="https://hackforums.net/scratchcard.php" class="usercp" title="Scratchcards"><i class="fa fa-clone fa-lg" aria-hidden="true"></i><span>Scratchcards</span></a></li>
+			<li><a href="https://hackforums.net/sportsbook.php" class="usercp" title="Sportsbook"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i><span>Sportsbook</span></a></li>
+			<li><a href="https://hackforums.net/blackjack.php" class="usercp" title="Blackjack"><i class="fa fa-money fa-lg" aria-hidden="true"></i><span>Blackjack</span></a></li>
+			<li><a href="https://hackforums.net/slots.php" class="usercp" title="Slots"><i class="fa fa-bomb fa-lg" aria-hidden="true"></i><span>Slots</span></a></li>
+			<li><a href="https://hackforums.net/cryptogame.php" class="usercp" title="Crypto Game"><i class="fa fa-btc fa-lg" aria-hidden="true"></i><span>Crypto Game</span></a></li>
+		</ul>
+		<ul id="navLeftDropdownMarketList" class="dropdown-menu" style="text-align: center;padding: 0;margin: 0; display: none;">
+			<li><a href="https://hackforums.net/marketcp.php?action=profile&amp;uid=4466395" class="usercp" title="Market Profile"><i class="fa fa-address-card fa-lg" aria-hidden="true"></i><span>Market Profile</span></a></li>
+			<li><a href="https://hackforums.net/contracts.php?uid=4466395" title="Contracts"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i><span>Contracts</span></a></li>
+			<li><a href="https://hackforums.net/marketcp.php?action=trusted" title="Your Trusted"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i><span>Your Trusted</span></a></li>
+			<li><a href="https://hackforums.net/marketcp.php?action=vendorlist" title="Vendors"><i class="fa fa-briefcase fa-lg" aria-hidden="true"></i><span>Vendors</span></a></li>
+			<li><a href="https://hackforums.net/buysticky.php" title="Forum Sticky"><i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i><span>Buy Forum Sticky</span></a></li>
+			<li><a href="https://hackforums.net/salestag.php" title="Sales Tag"><i class="fa fa-tag fa-lg" aria-hidden="true"></i><span>Buy Sales Tag</span></a></li>
+		</ul>
+	</div>
+<a href="https://hackforums.net/search.php" onclick="$('#quick_search').modal({ fadeDuration: 150, keepelement: true, zIndex: (typeof modal_zindex !== 'undefined' ? modal_zindex : 9999) }); return false;" id="top-nav-search" class="active"><i class="fa fa-binoculars" aria-hidden="true"></i></a>
+  	<a href="https://hackforums.net/convo.php" id="top-nav-messages"><i class="fa fa-bullhorn" aria-hidden="true"></i><span class="notify-number" id="notify_number_pms">0</span></a>
+  	<a href="javascript:void(0);" id="top-nav-alerts" onclick="Notify.processIconClick();"><i class="fa fa-bell" aria-hidden="true"></i><span class="notify-number" id="notify_number_alerts">0</span></a>
+	<a href="https://hackforums.net/quickthread.php" id="top-nav-quickthread" rel="nofollow"><i class="fa fa-pencil-square" aria-hidden="true" style="font-size: 1.25em;"></i></a>
+  	<a href="javascript:void(0);" class="menu" onclick="toggleNav()">☰</a>
+<script>var notify_count = 0;</script>
+<script src="page3_files/notify_7.js"></script>
+<script type="text/javascript">
+var is_guest_account = false;
+var unread_convo_messages = 0;
+if(unread_convo_messages > 0) {
+	$('#notify_number_pms').show();
+	$('#avatarNavConvoNum').text(' (' + unread_convo_messages + ')');
+}
+
+if(unread_pms > 0) {
+	$('#mobileDropdownPMs').text(' (' + unread_pms + ')');
+}
+	
+if(unread_alerts > 0) {
+	$('#notify_number_alerts').html(unread_alerts);
+	$('#notify_number_alerts').show();
+}
+
+let avatar_string = '';
+
+if(avatar_string) {
+	$('.header_avatar img').attr('src', "https://hackforums.net/" + avatar_string);
+}
+
+var script_name = window.location.pathname;
+	
+if(script_name.includes('alerts.php')) {
+	$('#top-nav-alerts').addClass('active');
+} else if(script_name.includes('search.php') || script_name.includes('forumdisplay.php') ||  script_name.includes('showthread.php')) {
+	$('#top-nav-search').addClass('active');
+} else if(script_name.includes('private.php')) {
+	$('#top-nav-messages').addClass('active');
+}
+
+function processAvatarDropdown() {
+		if(Notify.notifyOpen) {
+			let body_ele = $("body");
+			let header_ele = $("#header");
+			Notify.notifyOpen = false;
+			
+			Notify.notifyContainer.hide();			
+			if(body_ele.hasClass("notify-body-fixed")) {
+				body_ele.removeClass("notify-body-fixed");
+			}
+			
+			if(header_ele.hasClass("header-notify-force-display")) {
+				header_ele.removeClass("header-notify-force-display");
+			}
+		}
+
+			let dropdown = $('#navHeaderProfileLinks');
+
+			if(dropdown.hasClass('nav-left-dropdown-active')) {
+				dropdown.removeClass('nav-left-dropdown-active');
+			} else {
+				dropdown.addClass('nav-left-dropdown-active');
+			}
+		}
+
+		$('#navBarAvatarLink').on('click', function(e) {
+			processAvatarDropdown();
+		});
+
+		$('#navLeftDropdownGroup > div').on('click', function(e) {
+			let tab = $(this);
+			let list = $("#" + tab.attr('id') + "List");
+
+			tab.addClass('nav-left-dropdown-option-active');
+			list.addClass('nav-left-dropdown-option-list-active');
+
+			$("#navLeftDropdownGroup > div").each(function(i) {
+				let other_tab = $(this);
+
+				if(other_tab.attr('id') == tab.attr('id')) {
+					return;
+				}
+
+				let other_list = $("#" + other_tab.attr('id') + "List");
+
+				if(other_tab.hasClass('nav-left-dropdown-option-active')) {
+					other_tab.removeClass('nav-left-dropdown-option-active');
+				}
+
+				if(other_list.hasClass('nav-left-dropdown-option-list-active')) {
+					other_list.removeClass('nav-left-dropdown-option-list-active')
+				}
+
+			});
+		});
+</script>
+
+			                </div>
+		                 </div>
+		<div id="content">
+			<div class="wrapper">
+<!--//
+<div class="error" style="text-align:center;"><em>Bytes Bonus Day! Earn 12 Bytes for each new thread and get 10 Bytes for posting new replies. Earn your Bytes now!</em></div>
+-->
+
+				
+<div class="pm_alert" id="pm_notice" style="border: 2px solid #7d618e !important;">
+	<div><strong>You currently do not have any posts. Up until you create a post your account can be self-deleted</strong> with <a href="https://hackforums.net/misc.php?action=npsd_delete" style="font-weight: bold;">This Link</a>.</div>
+</div>
+
+				
+				
+				
+				
+				
+				
+<div class="breadcrumb">
+
+<a href="https://hackforums.net/index.php" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/index.php">Hack Forums</a>
+<span class="arrow"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=45" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=45">Hacks, Exploits, and Various Discussions</a>
+<span class="arrow"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=307" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=307">Advanced Hacking</a>
+<span class="arrow"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=92" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=92">Botnets, IRC Bots, and Zombies</a>
+<span class="arrow"></span>
+
+›
+
+<a href="https://hackforums.net/showthread.php?tid=55342">Host Booting / DDoSing Tutorial</a>
+<span class="arrow"></span>
+
+</div>
+
+				<br>
+<div class="mam-header" align="center"><a href="https://www.nakedturtle.me/?ref=hfheader" target="_blank"><img src="page3_files/81.gif"></a><a href="https://xleet.to/" target="_blank"><img src="page3_files/113.gif"></a></div>
+
+	
+	
+	<div class="float_left">
+		
+<div class="pagination">
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=2" class="pagination_previous"><i class="fa fa-angle-double-left"></i> Previous</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342" class="pagination_page">1</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=2" class="pagination_page">2</a>
+
+ <span class="pagination_current">3</span>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=4" class="pagination_page">4</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=5" class="pagination_page">5</a>
+
+...  <a href="https://hackforums.net/showthread.php?tid=55342&amp;page=92" class="pagination_last">92</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=4" class="pagination_next">Next »</a>
+
+<div class="popup_menu drop_go_page" style="display: none;" id="go_page_1_popup">
+	<label for="page">Jump to page:</label> <input type="text" class="textbox" name="paginationPageNum" value="3" size="4" style="min-width: 20px !important;">
+	<button class="button" type="button" onclick="paginationJumpGo($(this));">Go</button>
+</div>
+<a href="javascript:;" class="go_page" title="Jump to page" id="go_page_1"><i class="fa fa-chevron-down"></i></a>&nbsp;
+<script type="text/javascript">
+	function paginationJumpGo(paginationJumpNum) {
+		var new_page_num = parseInt(paginationJumpNum.prev().val());
+		if(isNaN(new_page_num)) {
+			new_page_num = 1;
+		}
+		window.open("https://hackforums.net/showthread.php?tid=55342&page=" + new_page_num, "_self")
+	}
+
+	var go_page = 'go_page_' + $(".go_page").length;
+	$(".go_page").last().attr('id', go_page);
+	$(".drop_go_page").last().attr('id', go_page + '_popup');
+	$('#' + go_page).popupMenu(false).click(function() {
+		var drop_go_page = $(this).prev('.drop_go_page');
+		if (drop_go_page.is(':visible')) {
+			drop_go_page.find('.textbox').focus();
+		}
+	});
+</script>
+
+</div>
+
+	</div>
+	<div class="float_right mobile-remove">
+		
+<a href="https://hackforums.net/newreply.php?tid=55342" class="button new_reply_button" rel="nofollow"><span>New Reply</span></a>&nbsp;
+
+	</div>
+	
+<article>
+	<table class="tborder tfixed clear" cellspacing="0" cellpadding="5" border="0">
+		<tbody><tr>
+			<td class="thead">
+				<div class="float_right">
+					<span class="smalltext"><strong><a href="javascript:void(0);" id="thread_modes"><i class="fa fa-cog oc-hf-icon icon-top fa-lg"></i></a></strong></span>
+				</div>
+				<div>
+					<strong></strong><h1>Host Booting / DDoSing Tutorial</h1>
+				</div>
+			</td>
+		</tr>
+<tr><td id="posts_container">
+	<div id="posts">
+		
+
+<a name="pid497751" id="pid497751"></a>
+<div class="post classic  clear" style="" id="post_497751">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Brent328 joined Dec 2008"><img src="page3_files/default_avatar_002.png" alt="Brent328" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559"><span style="color:#383838">Brent328</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Away"><img src="page3_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				Respect.<br>
+				
+				
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">1,859</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">83</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=32559" title="Business Rating of Brent328"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=32559" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=32559&amp;pid=497751&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=32559" title="Hacker Game Brent328 Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(497751);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=497751#pid497751" id="post_url_497751" title="&nbsp;" rel="nofollow">#31</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-13-2009, 08:36 PM <span class="post_edit" id="edited_by_497751"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_497751">
+		<blockquote class="mycode_quote"><cite><span> (03-13-2009, 07:10 AM)</span>Ayne Wrote: <a href="https://hackforums.net/showthread.php?pid=496700#pid496700" class="quick_jump">&nbsp;</a></cite><blockquote class="mycode_quote"><cite><span> (03-12-2009, 12:02 AM)</span>Brent328 Wrote: <a href="https://hackforums.net/showthread.php?pid=494226#pid494226" class="quick_jump">&nbsp;</a></cite><blockquote class="mycode_quote"><cite><span> (03-11-2009, 08:24 PM)</span>Nip Wrote: <a href="https://hackforums.net/showthread.php?pid=493778#pid493778" class="quick_jump">&nbsp;</a></cite>let me get this straight,<br>
+if I download this program and infect lets say 50 computers,<br>
+will I be able to take down a forum or something?<br>
+I don't get how it works, mind explaining please?</blockquote><br>
+No 50 computers won't be able to take down a forum. Even IRC botnets you
+ need like 800 infected and attacking. For this you probably need more.</blockquote><br>
+Will I be able to take down <a href="http://www.something.com/" target="_blank" rel="ugc" class="mycode_url">http://www.something.com/</a> with 20-50?</blockquote><br>
+no.<br>
+<br>
+<br>
+<span style="font-size: 3pt;" class="mycode_size">BTW to everyone, the 
+new DDoSer MetuS 2.0.1 is also half RAT, it can hide taskbar, hide 
+desktop icons, chat with victim, open cd tray, shutdown / reboot 
+computer, open website, download &amp; run .exe file, and start system 
+beep. they all work, I've tested it on myself on Vista and my XP virtual
+ machine.</span>
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_497751"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=32559" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=497751" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(497751);" style="" id="multiquote_link_497751" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_497751"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_497751').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(497751);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid497789" id="pid497789"></a>
+<div class="post classic  clear" style="" id="post_497789">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=45943" title="shitsite joined Mar 2009"><img src="page3_files/default_avatar_002.png" alt="shitsite" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=45943"><span style="color:#383838">shitsite</span></a></span></strong> 
+<img src="page3_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				this place is shit<br>
+				
+				
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">2,544</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">170</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=45943" title="Business Rating of shitsite"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=45943" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=45943&amp;pid=497789&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=45943" title="Hacker Game shitsite Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(497789);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=497789#pid497789" id="post_url_497789" title="&nbsp;" rel="nofollow">#32</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-13-2009, 08:57 PM <span class="post_edit" id="edited_by_497789">
+<span class="edited_post">(This post was last modified: 03-13-2009, 09:16 PM by <a href="https://hackforums.net/member.php?action=profile&amp;uid=45943">shitsite</a>.)</span>
+</span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_497789">
+		<blockquote class="mycode_quote"><cite><span> (03-13-2009, 08:36 PM)</span>Brent328 Wrote: <a href="https://hackforums.net/showthread.php?pid=497751#pid497751" class="quick_jump">&nbsp;</a></cite><blockquote class="mycode_quote"><cite><span> (03-13-2009, 07:10 AM)</span>Ayne Wrote: <a href="https://hackforums.net/showthread.php?pid=496700#pid496700" class="quick_jump">&nbsp;</a></cite><blockquote class="mycode_quote"><cite><span> (03-12-2009, 12:02 AM)</span>Brent328 Wrote: <a href="https://hackforums.net/showthread.php?pid=494226#pid494226" class="quick_jump">&nbsp;</a></cite><blockquote class="mycode_quote"><cite><span> (03-11-2009, 08:24 PM)</span>Nip Wrote: <a href="https://hackforums.net/showthread.php?pid=493778#pid493778" class="quick_jump">&nbsp;</a></cite>let me get this straight,<br>
+if I download this program and infect lets say 50 computers,<br>
+will I be able to take down a forum or something?<br>
+I don't get how it works, mind explaining please?</blockquote><br>
+No 50 computers won't be able to take down a forum. Even IRC botnets you
+ need like 800 infected and attacking. For this you probably need more.</blockquote><br>
+Will I be able to take down <a href="http://www.something.com/" target="_blank" rel="ugc" class="mycode_url">http://www.something.com/</a> with 20-50?</blockquote><br>
+no.<br>
+<br>
+<br>
+<span style="font-size: 3pt;" class="mycode_size">BTW to everyone, the 
+new DDoSer MetuS 2.0.1 is also half RAT, it can hide taskbar, hide 
+desktop icons, chat with victim, open cd tray, shutdown / reboot 
+computer, open website, download &amp; run .exe file, and start system 
+beep. they all work, I've tested it on myself on Vista and my XP virtual
+ machine.</span></blockquote><br>
+I'm going to scan it<br>
+<br>
+Previous Analysis<br>
+Queued<br>
+a-squared 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=4.0.0.93&amp;modal=1', null, true); return false;" rel="nofollow">4.0.0.93</a> 	2009.02.08 	-<br>
+AhnLab-V3 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=5.0.0.2&amp;modal=1', null, true); return false;" rel="nofollow">5.0.0.2</a> 	2009.02.07 	-<br>
+AntiVir 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=7.9.0.76&amp;modal=1', null, true); return false;" rel="nofollow">7.9.0.76</a> 	2009.02.07 	TR/Dropper.Gen<br>
+Authentium 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=5.1.0.4&amp;modal=1', null, true); return false;" rel="nofollow">5.1.0.4</a> 	2009.02.07 	W32/VB-EMU:VB-Backdoor-HMR-based!Maximus<br>
+Avast 	4.8.1335.0 	2009.02.07 	Win32:Trojan-gen {Other}<br>
+AVG 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=8.0.0.229&amp;modal=1', null, true); return false;" rel="nofollow">8.0.0.229</a> 	2009.02.07 	-<br>
+BitDefender 	7.2 	2009.02.08 	-<br>
+CAT-QuickHeal 	10.00 	2009.02.07 	-<br>
+ClamAV 	0.94.1 	2009.02.07 	-<br>
+Comodo 	969 	2009.02.07 	-<br>
+DrWeb 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=4.44.0.091&amp;modal=1', null, true); return false;" rel="nofollow">4.44.0.091</a>70 	2009.02.08 	BACKDOOR.Trojan<br>
+eSafe 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=7.0.17.0&amp;modal=1', null, true); return false;" rel="nofollow">7.0.17.0</a> 	2009.02.05 	-<br>
+eTrust-Vet 	31.6.6346 	2009.02.07 	-<br>
+F-Prot 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=4.4.4.56&amp;modal=1', null, true); return false;" rel="nofollow">4.4.4.56</a> 	2009.02.07 	W32/VB-EMU:VB-Backdoor-HMR-based!Maximus<br>
+F-Secure 	8.0.14470.0 	2009.02.08 	-<br>
+Fortinet 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=3.117.0.0&amp;modal=1', null, true); return false;" rel="nofollow">3.117.0.0</a> 	2009.02.08 	-<br>
+GData 	19 	2009.02.08 	Win32:Trojan-gen {Other}<br>
+Ikarus 	T <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=3.1.1.45&amp;modal=1', null, true); return false;" rel="nofollow">3.1.1.45</a>.0 	2009.02.08 	-<br>
+K7AntiVirus 	7.10.623 	2009.02.07 	-<br>
+Kaspersky 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=7.0.0.125&amp;modal=1', null, true); return false;" rel="nofollow">7.0.0.125</a> 	2009.02.08 	-<br>
+McAfee 	5518 	2009.02.07 	VB-BackDoor.a.gen<br>
+McAfee+Artemis 	5519 	2009.02.07 	VB-BackDoor.a.gen<br>
+Microsoft 	1.4306 	2009.02.06 	-<br>
+NOD32 	3836 	2009.02.07 	probably unknown NewHeur_PE<br>
+Norman 	6.00.02 	2009.02.06 	-<br>
+nProtect 	2 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=009.1.8.0&amp;modal=1', null, true); return false;" rel="nofollow">009.1.8.0</a> 	2009.02.08 	-<br>
+Panda 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=9.5.1.2&amp;modal=1', null, true); return false;" rel="nofollow">9.5.1.2</a> 	2009.02.07 	-<br>
+Prevx1 	V2 	2009.02.08 	-<br>
+Rising 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=21.15.50.0&amp;modal=1', null, true); return false;" rel="nofollow">21.15.50.0</a>0 	2009.02.07 	-<br>
+SecureWeb-Gateway 	6.7.6 	2009.02.07 	Trojan.Dropper.Gen<br>
+Sophos 	4.38.0 	2009.02.08 	-<br>
+Sunbelt 	3.2.1847.2 	2009.02.07 	-<br>
+Symantec 	10 	2009.02.08 	-<br>
+TheHacker 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=6.3.1.5&amp;modal=1', null, true); return false;" rel="nofollow">6.3.1.5</a>.248 	2009.02.07 	-<br>
+TrendMicro 	8.700.0.1004 	2009.02.06 	-<br>
+VBA32 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=3.12.8.12&amp;modal=1', null, true); return false;" rel="nofollow">3.12.8.12</a> 	2009.02.08 	-<br>
+ViRobot 	2 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=009.2.6.159&amp;modal=1', null, true); return false;" rel="nofollow">009.2.6.159</a>4 	2009.02.06 	-<br>
+VirusBuster 	 <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=4.5.11.0&amp;modal=1', null, true); return false;" rel="nofollow">4.5.11.0</a> 	2009.02.07 	-<br>
+<br>
+It's most likely safe.
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_497789"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=45943" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=497789" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(497789);" style="" id="multiquote_link_497789" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_497789"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_497789').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(497789);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid497804" id="pid497804"></a>
+<div class="post classic  clear" style="" id="post_497804">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Brent328 joined Dec 2008"><img src="page3_files/default_avatar_002.png" alt="Brent328" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559"><span style="color:#383838">Brent328</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Away"><img src="page3_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				Respect.<br>
+				
+				
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">1,859</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">83</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=32559" title="Business Rating of Brent328"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=32559" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=32559&amp;pid=497804&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=32559" title="Hacker Game Brent328 Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(497804);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=497804#pid497804" id="post_url_497804" title="&nbsp;" rel="nofollow">#33</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-13-2009, 09:04 PM <span class="post_edit" id="edited_by_497804">
+<span class="edited_post">(This post was last modified: 03-13-2009, 09:04 PM by <a href="https://hackforums.net/member.php?action=profile&amp;uid=32559">Brent328</a>.)</span>
+</span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_497804">
+		<blockquote class="mycode_quote"><cite><span> (03-13-2009, 08:57 PM)</span>Ayne Wrote: <a href="https://hackforums.net/showthread.php?pid=497789#pid497789" class="quick_jump">&nbsp;</a></cite>I'm going to scan it<br>
+<br>
+NVT scan:<br>
+Queued</blockquote><br>
+It will come up as a backdoor or trojan. I'll tell you that right now. It makes and controls them.
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_497804"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=32559" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=497804" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(497804);" style="" id="multiquote_link_497804" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_497804"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_497804').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(497804);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid503587" id="pid503587"></a>
+<div class="post classic  clear" style="" id="post_503587">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Brent328 joined Dec 2008"><img src="page3_files/default_avatar_002.png" alt="Brent328" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559"><span style="color:#383838">Brent328</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Away"><img src="page3_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				Respect.<br>
+				
+				
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">1,859</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">83</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=32559" title="Business Rating of Brent328"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=32559" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=32559&amp;pid=503587&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=32559" title="Hacker Game Brent328 Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(503587);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=503587#pid503587" id="post_url_503587" title="&nbsp;" rel="nofollow">#34</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-16-2009, 06:26 AM <span class="post_edit" id="edited_by_503587"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_503587">
+		<span style="font-size: 6pt;" class="mycode_size"><span style="color: green;" class="mycode_color">*Updated*</span></span><br>
+No need to PM me for the bot servers. The tutorial is 100% complete. <img src="page3_files/thumbsup.gif" alt="Thumbsup" title="Thumbsup" class="smilie smilie_46">
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_503587"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=32559" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=503587" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(503587);" style="" id="multiquote_link_503587" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_503587"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_503587').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(503587);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid504740" id="pid504740"></a>
+<div class="post classic  clear" style="" id="post_504740">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">wan5</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(504740);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=504740#pid504740" id="post_url_504740" title="&nbsp;" rel="nofollow">#35</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-16-2009, 08:00 PM <span class="post_edit" id="edited_by_504740"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_504740">
+		need a little help with this, im using the XR bot, hex edited my no ip
+ address into it per the tutorial, sent it to a willing friend to test, 
+launched the host booter but not getting any connections from it.  I 
+have the required port forwarded.<br>
+<br>
+Do i need to edit the host booter to know what to look for?
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_504740"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=504740" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(504740);" style="" id="multiquote_link_504740" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_504740"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_504740').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(504740);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid504917" id="pid504917"></a>
+<div class="post classic  clear" style="" id="post_504917">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=4413" title="Phіus joined Jan 2008"><img src="page3_files/default_avatar_002.png" alt="Phіus" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=4413"><span style="color:#383838">Phіus</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=4413" title="Away"><img src="page3_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">1,943</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">206</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=4413" title="Business Rating of Phіus"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=4413" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=4413&amp;pid=504917&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=4413" title="Hacker Game Phіus Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(504917);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=504917#pid504917" id="post_url_504917" title="&nbsp;" rel="nofollow">#36</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-16-2009, 09:10 PM <span class="post_edit" id="edited_by_504917"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_504917">
+		You can also use my botnet server! Speed of Light v1.0
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_504917"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=4413" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=504917" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(504917);" style="" id="multiquote_link_504917" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_504917"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_504917').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(504917);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid505683" id="pid505683"></a>
+<div class="post classic  clear" style="" id="post_505683">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">Brawl Sucks</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(505683);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=505683#pid505683" id="post_url_505683" title="&nbsp;" rel="nofollow">#37</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-17-2009, 03:39 AM <span class="post_edit" id="edited_by_505683"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_505683">
+		Hey brent, i know I will have some problems so would you be willing to
+ answer my questions? Do you have an aim, msn or something? I don't but i
+ could...
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_505683"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=505683" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(505683);" style="" id="multiquote_link_505683" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_505683"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_505683').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(505683);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid505699" id="pid505699"></a>
+<div class="post classic  clear" style="" id="post_505699">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">wan5</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(505699);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=505699#pid505699" id="post_url_505699" title="&nbsp;" rel="nofollow">#38</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-17-2009, 03:59 AM <span class="post_edit" id="edited_by_505699"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_505699">
+		Im having real problems with all these host booters, none of them will
+ connect.  Ive infected my own machine that is running the host boot 
+programes and i cant even connect to myself.  Ive tried forwarding the 
+ports and running on the DMZ port all with no luck.  I even got prorat 
+1.9 SE to use the proconective test and even that fails.<br>
+<br>
+I got a tool from portforward.com to test that the ports were open and 
+that tells me everything is fine and open! Ive made sure that my AV and 
+firewall is disabled and have even went as far as uninstalling my AV, 
+still without any luck! Even my routers firewall is disabled. <br>
+<br>
+Im normally not to bad with networking but this is driving me crazy.<br>
+<br>
+I know its not the same but i use teamviewer quite often without any 
+troubles, if anyone out there is willing to give a little bit of their 
+time to help me find a solution to this i would greatly appreciate it.<br>
+<br>
+Is it possible that my ISp is somehow blocking all these different apps?
+  It seems unlikley but like i said its really jerking my chain now!
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_505699"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=505699" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(505699);" style="" id="multiquote_link_505699" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_505699"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_505699').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(505699);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid514441" id="pid514441"></a>
+<div class="post classic  clear" style="" id="post_514441">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=49617" title="notahax joined Mar 2009"><img src="page3_files/default_avatar_002.png" alt="notahax" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=49617"><span style="color:#383838">notahax</span></a></span></strong> 
+<img src="page3_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">20</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">2</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=49617" title="Business Rating of notahax"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=49617" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=49617&amp;pid=514441&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=49617" title="Hacker Game notahax Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(514441);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=514441#pid514441" id="post_url_514441" title="&nbsp;" rel="nofollow">#39</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-21-2009, 04:40 AM <span class="post_edit" id="edited_by_514441">
+<span class="edited_post">(This post was last modified: 03-21-2009, 10:01 AM by <a href="https://hackforums.net/member.php?action=profile&amp;uid=49617">notahax</a>.)</span>
+</span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_514441">
+		<blockquote class="mycode_quote"><cite><span> (03-17-2009, 12:41 AM)</span>Brent[328] Wrote: <a href="https://hackforums.net/showthread.php?pid=505358#pid505358" class="quick_jump">&nbsp;</a></cite>Could be yours...<br>
+<br>
+[IMG]http://i139.photobucket.com/albums/q293/Brent328/Untitled42.jpg[/IMG]</blockquote><br>
+can i pay you to help me set it up? :D
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_514441"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=49617" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=514441" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(514441);" style="" id="multiquote_link_514441" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_514441"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_514441').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(514441);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid516019" id="pid516019"></a>
+<div class="post classic  clear" style="" id="post_516019">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Brent328 joined Dec 2008"><img src="page3_files/default_avatar_002.png" alt="Brent328" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=32559"><span style="color:#383838">Brent328</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=32559" title="Away"><img src="page3_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				Respect.<br>
+				
+				
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">1,859</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">83</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=32559" title="Business Rating of Brent328"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=32559" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=32559&amp;pid=516019&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=32559" title="Hacker Game Brent328 Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(516019);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=516019#pid516019" id="post_url_516019" title="&nbsp;" rel="nofollow">#40</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-21-2009, 10:38 PM <span class="post_edit" id="edited_by_516019"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_516019">
+		<blockquote class="mycode_quote"><cite><span> (03-21-2009, 04:40 AM)</span>notahax Wrote: <a href="https://hackforums.net/showthread.php?pid=514441#pid514441" class="quick_jump">&nbsp;</a></cite>can i pay you to help me set it up? :D</blockquote><br>
+Yeah I will set it up for you for a price. PM me.
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_516019"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=32559" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=516019" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(516019);" style="" id="multiquote_link_516019" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_516019"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_516019').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(516019);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid528880" id="pid528880"></a>
+<div class="post classic  clear" style="" id="post_528880">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">Austinn</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(528880);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=528880#pid528880" id="post_url_528880" title="&nbsp;" rel="nofollow">#41</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-27-2009, 08:33 PM <span class="post_edit" id="edited_by_528880"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_528880">
+		Very nice tut, very detailed!!<br>
+<br>
+<br>
+Way to go!
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_528880"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=528880" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(528880);" style="" id="multiquote_link_528880" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_528880"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_528880').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(528880);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid536716" id="pid536716"></a>
+<div class="post classic  clear" style="" id="post_536716">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">1hit1ko</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(536716);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=536716#pid536716" id="post_url_536716" title="&nbsp;" rel="nofollow">#42</a></strong>
+
+</div>
+
+		
+		<span class="post_date">03-30-2009, 04:13 PM <span class="post_edit" id="edited_by_536716"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_536716">
+		looking gd i gonna try it now tbh
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_536716"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=536716" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(536716);" style="" id="multiquote_link_536716" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_536716"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_536716').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(536716);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid545398" id="pid545398"></a>
+<div class="post classic  clear" style="" id="post_545398">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">i Slap Kidz</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(545398);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=545398#pid545398" id="post_url_545398" title="&nbsp;" rel="nofollow">#43</a></strong>
+
+</div>
+
+		
+		<span class="post_date">04-02-2009, 01:04 PM <span class="post_edit" id="edited_by_545398"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_545398">
+		I'v been looking everywhere for a legit tutorial on host booting, finally found it thanks so much bro!
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_545398"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=545398" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(545398);" style="" id="multiquote_link_545398" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_545398"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_545398').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(545398);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid551882" id="pid551882"></a>
+<div class="post classic  clear" style="" id="post_551882">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">tupac1222</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(551882);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=551882#pid551882" id="post_url_551882" title="&nbsp;" rel="nofollow">#44</a></strong>
+
+</div>
+
+		
+		<span class="post_date">04-04-2009, 04:24 PM <span class="post_edit" id="edited_by_551882"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_551882">
+		thanks i got it to work now i need bots :S<hr class="mycode_hr">
+<blockquote class="mycode_quote"><cite><span> (04-02-2009, 01:04 PM)</span>ZzowszZ Wrote: <a href="https://hackforums.net/showthread.php?pid=545398#pid545398" class="quick_jump">&nbsp;</a></cite>I'v been looking everywhere for a legit tutorial on host booting, finally found it thanks so much bro!</blockquote><br>
+agreed
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_551882"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=551882" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(551882);" style="" id="multiquote_link_551882" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_551882"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_551882').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(551882);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid557121" id="pid557121"></a>
+<div class="post classic  clear" style="" id="post_557121">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+	<div class="author_information">
+			<strong><span class="largetext"><span class="group0">xSpin</span></span></strong> <br>
+			<span class="smalltext">
+				Guest<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+&nbsp;
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(557121);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=55342&amp;pid=557121#pid557121" id="post_url_557121" title="&nbsp;" rel="nofollow">#45</a></strong>
+
+</div>
+
+		
+		<span class="post_date">04-06-2009, 02:06 AM <span class="post_edit" id="edited_by_557121"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_557121">
+		I'm looking for a Crypter for my XR bot.  I've looked everywhere and their either private or they don't support EOF.<br>
+<br>
+Help!
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_557121"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+<a href="https://hackforums.net/newreply.php?tid=55342&amp;replyto=557121" title="Quote this message in a reply" class="postbit_quote" rel="nofollow" data-tooltip="Quote Reply"><span><i class="fa fa-comment-o fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+<a href="javascript:Thread.multiQuote(557121);" style="" id="multiquote_link_557121" title="Quote this post" class="postbit_multiquote" data-tooltip="Multi-Quote"><span id="multiquote_557121"><i class="fa fa-comments-o fa-lg" aria-hidden="true"></i></span></a>
+<script type="text/javascript">
+//<!--
+	$('#multiquote_link_557121').css("display", "");
+// -->
+</script>
+
+
+<a href="javascript:Report.reportPost(557121);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+	</div>
+</td></tr>
+		<tr>
+			<td class="tfoot">
+				
+	<div class="float_right">
+		<form action="search.php" method="post">
+			<input type="hidden" name="action" value="thread">
+			<input type="hidden" name="tid" value="55342">
+			<input type="text" name="keywords" value="Enter Keywords" onfocus="if(this.value == 'Enter Keywords') { this.value = ''; }" onblur="if(this.value=='') { this.value='Enter Keywords'; }" class="textbox" size="25">
+			<input type="submit" class="button" value="Search Thread">
+		</form>
+	</div>
+
+				<div class="mobile-remove">
+					<strong><i class="fa fa-angle-double-left"></i> <a href="https://hackforums.net/showthread.php?tid=55342&amp;action=nextoldest" rel="nofollow">Next Oldest</a> | <a href="https://hackforums.net/showthread.php?tid=55342&amp;action=nextnewest" rel="nofollow">Next Newest</a> <i class="fa fa-angle-double-right"></i></strong>
+				</div>
+			</td>
+		</tr>
+	</tbody></table>
+</article>
+	<div class="float_left">
+		
+<div class="pagination">
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=2" class="pagination_previous"><i class="fa fa-angle-double-left"></i> Previous</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342" class="pagination_page">1</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=2" class="pagination_page">2</a>
+
+ <span class="pagination_current">3</span>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=4" class="pagination_page">4</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=5" class="pagination_page">5</a>
+
+...  <a href="https://hackforums.net/showthread.php?tid=55342&amp;page=92" class="pagination_last">92</a>
+
+<a href="https://hackforums.net/showthread.php?tid=55342&amp;page=4" class="pagination_next">Next »</a>
+
+<div class="popup_menu drop_go_page" style="display: none;" id="go_page_2_popup">
+	<label for="page">Jump to page:</label> <input type="text" class="textbox" name="paginationPageNum" value="3" size="4" style="min-width: 20px !important;">
+	<button class="button" type="button" onclick="paginationJumpGo($(this));">Go</button>
+</div>
+<a href="javascript:;" class="go_page" title="Jump to page" id="go_page_2"><i class="fa fa-chevron-down"></i></a>&nbsp;
+<script type="text/javascript">
+	function paginationJumpGo(paginationJumpNum) {
+		var new_page_num = parseInt(paginationJumpNum.prev().val());
+		if(isNaN(new_page_num)) {
+			new_page_num = 1;
+		}
+		window.open("https://hackforums.net/showthread.php?tid=55342&page=" + new_page_num, "_self")
+	}
+
+	var go_page = 'go_page_' + $(".go_page").length;
+	$(".go_page").last().attr('id', go_page);
+	$(".drop_go_page").last().attr('id', go_page + '_popup');
+	$('#' + go_page).popupMenu(false).click(function() {
+		var drop_go_page = $(this).prev('.drop_go_page');
+		if (drop_go_page.is(':visible')) {
+			drop_go_page.find('.textbox').focus();
+		}
+	});
+</script>
+
+</div>
+
+	</div>
+	<div style="padding-top: 4px;" class="float_right">
+		
+<a href="https://hackforums.net/newreply.php?tid=55342" class="button new_reply_button" rel="nofollow"><span>New Reply</span></a>&nbsp;
+
+	</div>
+	<br class="clear">
+	
+<div id="quickreply_spinner" class="showthread_spinner" style="display: none"><img src="page3_files/spinner_big.gif" style="display: none;"></div>
+<br>
+
+<form method="post" action="newreply.php?tid=55342&amp;processed=1" name="quick_reply_form" id="quick_reply_form">
+	<input type="hidden" name="my_post_key" value="01ce07b2d23227f1c6a1c694d6e27f8e">
+	<input type="hidden" name="subject" value="RE: Host Booting / DDoSing Tutorial">
+	<input type="hidden" name="action" value="do_newreply">
+	<input type="hidden" name="posthash" value="82b50bf16585b7f1602bf850f69d15d6" id="posthash">
+	<input type="hidden" name="quoted_ids" value="" id="quoted_ids">
+	<input type="hidden" name="lastpid" id="lastpid" value="59057613">
+	<input type="hidden" name="from_page" value="3">
+	<input type="hidden" name="tid" value="55342">
+	<input type="hidden" name="method" value="quickreply">
+
+	<table class="tborder" cellspacing="0" cellpadding="5" border="0">
+		<thead>
+			<tr>
+				<td class="thead" colspan="2">
+					<div class="expcolimage"><img src="page3_files/collapse.png" id="quickreply_img" class="expander" alt="[-]" title="[-]" style="cursor: pointer;"></div>
+					<div><strong>Quick Reply</strong></div>
+				</td>
+			</tr>
+		</thead>
+		<tbody style="" id="quickreply_e">
+			<tr>
+				<td class="trow1 thread-quickchat" valign="top">
+					<strong>Message</strong><br>
+					<span class="smalltext">Type your reply to this message here.<br><br>
+					
+<label><input type="checkbox" class="checkbox" name="postoptions[signature]" value="1">&nbsp;<strong>Signature</strong></label><br>
+
+					<label><input type="checkbox" class="checkbox" name="postoptions[disablesmilies]" value="1">&nbsp;<strong>Disable Smilies</strong></label></span>
+				</td>
+				<td class="trow1">
+					<div style="width: 95%">
+						<textarea style="width: 100%; padding: 4px; margin: 0;" rows="8" cols="80" name="message" id="message" placeholder="Speak your mind..." tabindex="1"></textarea>
+					</div>
+					<div class="editor_control_bar" style="width: 95%; padding: 4px; margin-top: 3px; display: none;" id="quickreply_multiquote">
+						<span class="smalltext">
+							You have selected one or more posts to quote. <a href="https://hackforums.net/newreply.php?tid=55342&amp;load_all_quotes=1" onclick="return Thread.loadMultiQuoted();">Quote these posts now</a> or <a href="javascript:Thread.clearMultiQuoted();">deselect them</a>.
+						</span>
+					</div>
+				</td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" class="tfoot tcenter"><input type="submit" class="button" value="Post Reply" tabindex="2" accesskey="s" id="quick_reply_submit"> <input type="submit" class="button" name="previewpost" value="Preview Post" tabindex="3"></td>
+			</tr>
+		</tbody>
+	</table>
+</form>
+
+	
+	
+	<br>
+	<div class="float_left">
+		<ul class="thread_tools">
+			<li class="printable"><a href="https://hackforums.net/printthread.php?tid=55342" title="Print - Host Booting / DDoSing Tutorial">View a Printable Version</a></li>
+			<li class="pdf"><a href="https://hackforums.net/pdf.php?tid=55342" title="PDF - Host Booting / DDoSing Tutorial">Export as PDF</a></li>
+			
+			<li class="subscription_add"><a href="https://hackforums.net/usercp2.php?action=addsubscription&amp;tid=55342&amp;my_post_key=01ce07b2d23227f1c6a1c694d6e27f8e" rel="nofollow" title="Manage Subscription - Host Booting / DDoSing Tutorial">Subscribe to this thread</a></li>
+			
+		</ul>
+	</div>
+
+	<div class="float_right" style="text-align: right;">
+		
+	</div>
+	<br class="clear">
+	
+	
+<div class="mam-footerbig scaleimages" align="center"><script type="text/javascript">
+		amzn_assoc_ad_type = "banner";
+		amzn_assoc_marketplace = "amazon";
+		amzn_assoc_region = "US";
+		amzn_assoc_placement = "assoc_banner_placement_default";
+		amzn_assoc_campaigns = "computers_accesories";
+		amzn_assoc_banner_type = "category";
+		amzn_assoc_p = "42";
+		amzn_assoc_isresponsive = "false";
+		amzn_assoc_banner_id = "01P7BXJ6BWD5V0KXBZG2";
+		amzn_assoc_width = "234";
+		amzn_assoc_height = "60";
+		amzn_assoc_tracking_id = "multimedia2-20";
+		amzn_assoc_linkid = "7aad41f5e81786cf19de6360f0ee67c6";
+	</script>
+	<script src="page3_files/q.js"></script></div>
+<div class="mam-footersmall scaleimages" align="center"><a href="https://thesealhosting.com/" target="_blank"><img src="page3_files/142.gif"></a><a href="https://thesealexploit.com/" target="_blank"><img src="page3_files/87.gif"></a></div>
+
+	</div>
+</div>
+<div id="footer">
+	<div class="upper">
+		<div class="wrapper">
+			
+			<ul class="menu bottom_links">
+				
+<li><a href="https://hackforums.net/contact.php">Contact Us</a></li>
+
+				<li><a href="https://hackforums.net/">Hack Forums</a></li>
+				<li><a href="#top">Return to Top</a></li>
+                                <li><a href="https://hackforums.net/myawards.php" rel="nofollow">Awards</a></li>
+                                <li><a href="https://hackforums.net/misc.php?action=markread&amp;my_post_key=01ce07b2d23227f1c6a1c694d6e27f8e" rel="nofollow">Mark All Forums Read</a></li>
+                                <li><a href="https://hackforums.net/stats.php" title="Hack Forums Statistics">Statistics</a></li>
+                                <li><a href="https://hackforums.net/showstaff.php" title="Hack Forums Staff">Staff</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="lower">
+		<div class="wrapper">
+			<span id="copyright">Powered By <a href="https://www.mybb.com/" target="_blank" rel="noopener">MyBB</a> - <a href="https://hackforums.net/" target="_blank">HackForums</a>, © 2002-2019</span>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">if(MyBB) { $([document, window]).bind("load", function() { MyBB.detectDSTChange('0'); }); }</script>
+
+</div>
+
+	<div id="thread_modes_popup" class="popup_menu" style="display: none;">
+<div class="popup_item_container"><a href="javascript:void(0)" onclick="MyBB.whoPosted(55342); return false;" class="popup_item" rel="nofollow">Who Posted</a></div>
+<div class="popup_item_container"><a href="https://hackforums.net/showthread.php?tid=55342&amp;mode=single" class="popup_item" rel="nofollow">Your Posts</a></div>
+<div class="popup_item_container"><a href="https://hackforums.net/usercp2.php?action=addsubscription&amp;tid=55342&amp;my_post_key=01ce07b2d23227f1c6a1c694d6e27f8e" class="popup_item" rel="nofollow">Subscribe to this thread</a></div>
+<div class="popup_item_container"><a href="https://hackforums.net/printthread.php?tid=55342" class="popup_item">View a Printable Version</a></div>
+</div>
+	<script type="text/javascript">
+	// <!--
+		if(use_xmlhttprequest == "1")
+		{
+			$("#thread_modes").popupMenu();
+		}
+	// -->
+	</script>
+	<script type="text/javascript">
+		$(".author_avatar img").error(function () {
+			$(this).unbind("error").closest('.author_avatar').remove();
+		});
+	</script>
+<script type="text/javascript">
+			jQuery.fn.selectText = function(){   
+				var element = this[0];
+				if (document.body.createTextRange) {
+					var range = document.body.createTextRange();
+					range.moveToElementText(element);
+					range.select();
+				} else if (window.getSelection) {
+					var selection = window.getSelection();        
+					var range = document.createRange();
+					range.selectNodeContents(element);
+					selection.removeAllRanges();
+					selection.addRange(range);
+				}
+			};
+
+			$(function() {
+				$('.copynotice').click(function() {
+					thisCode = $(this).parent().parent().find('.phpcode');
+					$(thisCode).selectText();
+					document.execCommand('copy');
+					$(this).after('<span style="color: #4caf50; font-size: 12px; font-weight: bold; margin-left: 11px;">Copied!</span>');
+				});
+
+				$('.phpcode').dblclick(function() {
+					$(this).selectText();
+				});
+			});
+		</script>
+<script type="text/javascript" src="page3_files/select2.js"></script>
+
+
+</body></html>

