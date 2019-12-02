@@ -9,7 +9,7 @@ def discrete_bars(results, category_names):
     category_colors = plot.get_cmap('RdYlGn')(
         np.linspace(0.15, 0.85, data.shape[1]))
 
-    fig, ax = plot.subplots(figsize=(9.2, 5))
+    fig, ax = plot.subplots(figsize=(9.2, 50))
     ax.invert_yaxis()
     ax.xaxis.set_visible(False)
     ax.set_xlim(0, np.sum(data, axis=1).max())
@@ -39,23 +39,23 @@ commentFile = pd.read_csv("fullCommentData.csv", quotechar='"', encoding='utf8')
 categories = ['Trade', 'Positive Review', 'Negative Review', 'Q&A', 'Self-Promotion', 'Other']
 
 thread_ids = commentFile['Thread ID']
-print(thread_ids)
-input()
+# print(thread_ids)
+# input()
 trade_marks = commentFile['Trade']
-print(trade_marks)
-input()
+# print(trade_marks)
+# input()
 review_marks = commentFile['Review']
-print(review_marks)
-input()
+# print(review_marks)
+# input()
 qa_marks = commentFile['Q&A']
-print(qa_marks)
-input()
+# print(qa_marks)
+# input()
 promo_marks = commentFile['Self-Promotion']
-print(promo_marks)
-input()
+# print(promo_marks)
+# input()
 
-cw_threads = 50 * [7 * [0]]
-caas_threads = 50 * [7 * [0]]
+cw_threads = [[0 for i in range(7)] for j in range(50)]
+caas_threads = [[0 for i in range(7)] for j in range(50)]
 
 i = 0
 for i, id in enumerate(thread_ids):
@@ -67,6 +67,9 @@ for i, id in enumerate(thread_ids):
             cw_threads[id][2] += 1
         elif review_marks[i] == '-':
             cw_threads[id][3] += 1
+        elif review_marks[i] != '0':
+            print(review_marks[i])
+            cw_threads[id][6] += 1
         elif qa_marks[i] != 0:
             cw_threads[id][4] += 1
         elif promo_marks[i] != 0:
@@ -82,6 +85,8 @@ for i, id in enumerate(thread_ids):
             caas_threads[id][2] += 1
         elif review_marks[i] == '-':
             caas_threads[id][3] += 1
+        elif review_marks[i] != '0':
+            caas_threads[id][6] += 1
         elif qa_marks[i] != 0:
             caas_threads[id][4] += 1
         elif promo_marks[i] != 0:
@@ -92,19 +97,21 @@ for i, id in enumerate(thread_ids):
 cw_dict = {}
 caas_dict = {}
 
+# print(cw_threads)
+# print(caas_threads)
 for i, thread in enumerate(cw_threads):
-    print(thread)
+    # print(thread)
     thread = [i / thread[0] for i in thread]
-    print(thread)
+    # print(thread)
     cw_dict[f'Thread {i+1}'] = thread[1:]
-    print(cw_dict[f'Thread {i+1}'])
-print(cw_dict)
+    # print(cw_dict[f'Thread {i+1}'])
+# print(cw_dict)
 
 for i, thread in enumerate(caas_threads):
     thread = [i / thread[0] for i in thread]
-    cw_dict[f'Thread {i+51}'] = thread[1:]
+    caas_dict[f'Thread {i+51}'] = thread[1:]
 
-discrete_bars(cw_dict, categories)
-plot.show()
+# discrete_bars(cw_dict, categories)
+# plot.show()
 discrete_bars(caas_dict, categories)
 plot.show()
