@@ -4,6 +4,24 @@ import pandas as pd
 import random
 from operator import itemgetter
 
+def scatter(views, replies):
+    fig, ax = plot.subplots()
+
+    ax.set_yscale('log')
+    ax.set_xscale('log')
+    ax.set_xlabel("Views", fontsize=15)
+    ax.set_ylabel("Replies", fontsize=15)
+    ax.grid(True)
+    ax.scatter(views, replies, alpha=0.5)
+    ax.set_xlim((100, 1000000))
+    ax.plot([1000, 1000000], [10, 10000], c='red', label="y = x / 100")
+    ax.set_ylim((10, 10000))
+    ax.legend()
+    plot.show()
+    #ax.legend().remove()
+
+    return fig, ax
+
 def discrete_bars(results, category_names):
     labels = list(results.keys())
     data = np.array(list(results.values()))
@@ -30,13 +48,18 @@ def discrete_bars(results, category_names):
     ax.legend(ncol=len(category_names), bbox_to_anchor=(0, 1),
               loc='lower left', fontsize='small')
 
+    plot.show()
     return fig, ax
 
 commentFile = pd.read_csv("fullCommentData.csv", quotechar='"', encoding='utf8')
 threadFile = pd.read_csv("fullThreadData.csv", quotechar='"', encoding='utf8')
 
 # make log scaled scatter of views to replies
+view_counts = [int(v) for v in list(threadFile['Views']) if v.isdigit()]
+reply_counts = [int(r) for r in list(threadFile['Replies']) if r.isdigit()]
 
+scatter(view_counts[:50], reply_counts[:50]) #botnets
+scatter(view_counts[50:], reply_counts[50:]) #refunds
 
 # Discrete bar chart of comment categorization
 categories = ['Trade', 'Positive Review', 'Negative Review', 'Q&A', 'Self-Promotion', 'Other']
@@ -99,7 +122,6 @@ for i, id in enumerate(thread_ids):
 
 cw_threads = sorted([[i / thread[0] for i in thread] for thread in cw_threads], key=itemgetter(1,2,3,4,5,6), reverse=True)
 caas_threads = sorted([[i / thread[0] for i in thread] for thread in caas_threads], key=itemgetter(1,2,3,4,5,6), reverse=True)
-print([(i[1], i[2]) for i in caas_threads])
 
 cw_dict = {}
 caas_dict = {}
@@ -119,9 +141,6 @@ for i, thread in enumerate(caas_threads):
     caas_dict[f'Thread {i+51}'] = thread[1:]
 
 # discrete_bars(cw_dict, categories)
-# plot.show()
 # discrete_bars(caas_dict, categories)
-# plot.show()
 # sample_keys = list(caas_dict)[random.choice([0,1,2,3,4])::3]
 # discrete_bars({k:caas_dict[k] for k in sample_keys}, categories)
-# plot.show()
