@@ -111,8 +111,8 @@ def make_radar_data(counts):
     for index, count in enumerate(counts):
         lis = [0 for _ in range(len(counts))]
         lis[index] = count
-        lis[index-1] = count / 10
-        lis[(index+1)%len(lis)] = count / 10
+        lis[index-1] = count / 5
+        lis[(index+1)%len(lis)] = count / 5
         data.append(lis)
     return data
 
@@ -288,7 +288,6 @@ for i, id in enumerate(thread_ids):
         elif str(review_marks[i]) != '0':
             cw_threads[id][6] += 1
         elif str(qa_marks[i]) != 0:
-            print(f"qa 1: {type(qa_marks[i])} {qa_marks[i]} @ {i}")
             cw_threads[id][4] += 1
         elif str(promo_marks[i]) != '0':
             cw_threads[id][5] += 1
