@@ -109,23 +109,23 @@ def unit_poly_verts(theta):
 def make_radar_data(counts):
     data = []
     for index, count in enumerate(counts):
-        lis = [0 for _ in range(len(counts))]
-        lis[index] = count
-        lis[index-1] = count / 5
-        lis[(index+1)%len(lis)] = count / 5
+        lis = [0 for _ in range(len(counts) * 2)]
+        lis[index*2] = count
+        lis[index*2-1] = count
+        lis[(index*2+1)%len(lis)] = count
         data.append(lis)
     return data
 
 def radar(counts, categories):
     data = make_radar_data(counts)
-    theta = radar_factory(len(categories))
+    theta = radar_factory(len(categories), frame='polygon')
     fig, ax = plot.subplots(figsize=(9, 9), subplot_kw=dict(projection='radar'))
     fig.subplots_adjust(wspace=0.25, hspace=0.20, top=0.85, bottom=0.05)
     colors = [(1,0,0), (1,0.5,0), (1,1,0), (0,1,0), (0,1,1), (0,0,1), (1,0,1), (1,0,0.5), (0,0,0)]
-    ax.set_rgrids([0.2, 0.4, 0.6, 0.8])
+    ax.set_rgrids([0.15, 0.30, 0.45, 0.60, 0.75, 0.90])
     for d, color in zip(data, colors):
         ax.plot(theta, d, color=color)
-        ax.fill(theta, d, facecolor=color, alpha=0.25)
+        ax.fill(theta, d, facecolor=color, alpha=0.8)
     ax.set_varlabels(categories)
 
     plot.show()
@@ -192,7 +192,7 @@ litecoin = ['LTC']
 other_crypto = ['XRP', 'XMR', 'Skrill', 'Any Crypto']
 bank_transfer = ['Bank Transfer']
 giftcard = ['Gift card', 'Gift Card']
-categories = ["Unknown", "PayPal", "Bitcoin", "Etherium", "Litecoin", "Other Cryptocurrency", "Bank Transfer", "Gift card", "Other"]
+categories = ["Unknown", "", "Bank Transfer", "", "Bitcoin", "", "Etherium", "", "Litecoin", "", "Other Cryptocurrency", "", "PayPal", "", "Gift card", "", "Other", ""]
 
 cw_counts = [0 for _ in range(9)]
 caas_counts = [0 for _ in range(9)]
@@ -202,7 +202,7 @@ for entry in currency_data[:50]: #cw
     for currency in entry:
         if currency in unknown:
             cw_counts[0] += 1
-        elif currency in paypal:
+        elif currency in bank_transfer:
             cw_counts[1] += 1
         elif currency in bitcoin:
             cw_counts[2] += 1
@@ -212,7 +212,7 @@ for entry in currency_data[:50]: #cw
             cw_counts[4] += 1
         elif currency in other_crypto:
             cw_counts[5] += 1
-        elif currency in bank_transfer:
+        elif currency in paypal:
             cw_counts[6] += 1
         elif currency in giftcard:
             cw_counts[7] += 1
@@ -223,7 +223,7 @@ for entry in currency_data[50:]: #caas
     for currency in entry:
         if currency in unknown:
             caas_counts[0] += 1
-        elif currency in paypal:
+        elif currency in bank_transfer:
             caas_counts[1] += 1
         elif currency in bitcoin:
             caas_counts[2] += 1
@@ -233,7 +233,7 @@ for entry in currency_data[50:]: #caas
             caas_counts[4] += 1
         elif currency in other_crypto:
             caas_counts[5] += 1
-        elif currency in bank_transfer:
+        elif currency in paypal:
             caas_counts[6] += 1
         elif currency in giftcard:
             caas_counts[7] += 1
@@ -250,8 +250,8 @@ radar(caas_counts, categories)
 view_counts = [int(v) for v in list(threadFile['Views']) if v.isdigit()]
 reply_counts = [int(r) for r in list(threadFile['Replies']) if r.isdigit()]
 
-scatter(view_counts[:50], reply_counts[:50]) #botnets
-scatter(view_counts[50:], reply_counts[50:]) #refunds
+#scatter(view_counts[:50], reply_counts[:50]) #botnets
+#scatter(view_counts[50:], reply_counts[50:]) #refunds
 
 # Discrete bar chart of comment categorization
 categories = ['Trade', 'Positive Review', 'Negative Review', 'Q&A', 'Self-Promotion', 'Other']
@@ -331,9 +331,9 @@ for i, thread in enumerate(caas_threads):
     #thread = [i / thread[0] for i in thread]
     caas_dict[f'Thread {i+1}'] = thread[1:]
 
-discrete_bars(cw_dict, categories)
-sample_keys = list(cw_dict)[random.choice([0, 1, 2])::3]
-discrete_bars({k:cw_dict[k] for k in sample_keys}, categories) 
-discrete_bars(caas_dict, categories)
-sample_keys = list(caas_dict)[random.choice([0, 1, 2])::3]
-discrete_bars({k:caas_dict[k] for k in sample_keys}, categories)
+# discrete_bars(cw_dict, categories)
+# sample_keys = list(cw_dict)[random.choice([0, 1, 2])::3]
+# discrete_bars({k:cw_dict[k] for k in sample_keys}, categories) 
+# discrete_bars(caas_dict, categories)
+# sample_keys = list(caas_dict)[random.choice([0, 1, 2])::3]
+# discrete_bars({k:caas_dict[k] for k in sample_keys}, categories)
