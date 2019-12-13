@@ -248,8 +248,8 @@ radar(cw_counts, categories, "Acceptance Rates of Currencies in Botnet Threads")
 radar(caas_counts, categories, "Acceptance Rates of Currencies in Refunding Threads")
 
 # make log scaled scatter of views to replies
-view_counts = [int(v) for v in list(threadFile['Views']) if v.isdigit()] #TODO: remove isdigit clause once all data collected
-reply_counts = [int(r) for r in list(threadFile['Replies']) if r.isdigit()]
+view_counts = [int(v) for v in list(threadFile['Views'])]
+reply_counts = [int(r) for r in list(threadFile['Replies'])]
 
 scatter(view_counts[:50], reply_counts[:50], "Distribution of Views and Replies of Botnet Threads") #botnets
 scatter(view_counts[50:], reply_counts[50:], "Distribution of Views and Replies of Refunding Threads") #refunds
