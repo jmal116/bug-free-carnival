@@ -175,7 +175,7 @@ def discrete_bars(results, category_names, title):
                 prop = round(float(c), 2)
                 ax.text(x, y, str(prop) if prop != 0 else "", ha='center', va='center', color=text_color)
     ax.legend(ncol=len(category_names), bbox_to_anchor=(
-        0, 0.945), loc='lower left', fontsize='small')
+        0, 0.95), loc='lower left', fontsize='small')
     ax.set_title(title)
 
     plot.show()
