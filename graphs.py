@@ -8,7 +8,6 @@ from matplotlib.spines import Spine
 from matplotlib.projections.polar import PolarAxes
 from matplotlib.projections import register_projection
 
-
 def radar_factory(num_vars, frame='circle'):
     """Create a radar chart with `num_vars` axes.
 
@@ -96,7 +95,6 @@ def radar_factory(num_vars, frame='circle'):
     register_projection(RadarAxes)
     return theta
 
-
 def unit_poly_verts(theta):
     """Return vertices of polygon for subplot axes.
 
@@ -116,7 +114,7 @@ def make_radar_data(counts):
         data.append(lis)
     return data
 
-def radar(counts, categories):
+def radar(counts, categories, title):
     data = make_radar_data(counts)
     theta = radar_factory(len(categories), frame='polygon')
     fig, ax = plot.subplots(figsize=(9, 9), subplot_kw=dict(projection='radar'))
@@ -127,12 +125,13 @@ def radar(counts, categories):
         ax.plot(theta, d, color=color)
         ax.fill(theta, d, facecolor=color, alpha=0.8)
     ax.set_varlabels(categories)
+    ax.set_title(title)
 
     plot.show()
 
     return fig, ax
 
-def scatter(views, replies):
+def scatter(views, replies, title):
     fig, ax = plot.subplots()
 
     ax.set_yscale('log')
@@ -142,15 +141,16 @@ def scatter(views, replies):
     ax.grid(True)
     ax.scatter(views, replies, alpha=0.5)
     ax.set_xlim((100, 1000000))
-    ax.plot([1000, 1000000], [10, 10000], c='red', label="y = x / 100")
+    ax.plot([1000, 1000000], [10, 10000], c='red', label="1 Reply per 100 Views")
     ax.set_ylim((10, 10000))
+    ax.set_title(title)
     ax.legend()
     plot.show()
     #ax.legend().remove()
 
     return fig, ax
 
-def discrete_bars(results, category_names):
+def discrete_bars(results, category_names, title):
     labels = list(results.keys())
     data = np.array(list(results.values()))
     data_cum = data.cumsum(axis=1)
@@ -172,10 +172,11 @@ def discrete_bars(results, category_names):
         text_color = 'black'#'white' if r * g * b < 0.5 else 'darkgrey'
         if len(results) < 25:
             for y, (x, c) in enumerate(zip(xcenters, widths)):
-                prop = round(float(c), 3)
+                prop = round(float(c), 2)
                 ax.text(x, y, str(prop) if prop != 0 else "", ha='center', va='center', color=text_color)
-    ax.legend(ncol=len(category_names), bbox_to_anchor=(0, 1),
-              loc='lower left', fontsize='small')
+    ax.legend(ncol=len(category_names), bbox_to_anchor=(
+        0, 0.945), loc='lower left', fontsize='small')
+    ax.set_title(title)
 
     plot.show()
     return fig, ax
@@ -243,15 +244,15 @@ for entry in currency_data[50:]: #caas
 cw_counts = [i / 50 for i in cw_counts]
 caas_counts = [i / 50 for i in caas_counts]
 
-radar(cw_counts, categories)
-radar(caas_counts, categories)
+radar(cw_counts, categories, "Acceptance Rates of Currencies in Botnet Threads")
+radar(caas_counts, categories, "Acceptance Rates of Currencies in Refunding Threads")
 
 # make log scaled scatter of views to replies
-view_counts = [int(v) for v in list(threadFile['Views']) if v.isdigit()]
+view_counts = [int(v) for v in list(threadFile['Views']) if v.isdigit()] #TODO: remove isdigit clause once all data collected
 reply_counts = [int(r) for r in list(threadFile['Replies']) if r.isdigit()]
 
-#scatter(view_counts[:50], reply_counts[:50]) #botnets
-#scatter(view_counts[50:], reply_counts[50:]) #refunds
+scatter(view_counts[:50], reply_counts[:50], "Distribution of Views and Replies of Botnet Threads") #botnets
+scatter(view_counts[50:], reply_counts[50:], "Distribution of Views and Replies of Refunding Threads") #refunds
 
 # Discrete bar chart of comment categorization
 categories = ['Trade', 'Positive Review', 'Negative Review', 'Q&A', 'Self-Promotion', 'Other']
@@ -331,9 +332,9 @@ for i, thread in enumerate(caas_threads):
     #thread = [i / thread[0] for i in thread]
     caas_dict[f'Thread {i+1}'] = thread[1:]
 
-# discrete_bars(cw_dict, categories)
-# sample_keys = list(cw_dict)[random.choice([0, 1, 2])::3]
-# discrete_bars({k:cw_dict[k] for k in sample_keys}, categories) 
-# discrete_bars(caas_dict, categories)
-# sample_keys = list(caas_dict)[random.choice([0, 1, 2])::3]
-# discrete_bars({k:caas_dict[k] for k in sample_keys}, categories)
+discrete_bars(cw_dict, categories, "Full Botnet Comment Categorizy Distributions")
+sample_keys = list(cw_dict)[random.choice([0, 1, 2])::3]
+discrete_bars({k:cw_dict[k] for k in sample_keys}, categories, "Detailed Sampled Botnet Comment Category Distributions") 
+discrete_bars(caas_dict, categories, "Full Refunding Comment Category distributions")
+sample_keys = list(caas_dict)[random.choice([0, 1, 2])::3]
+discrete_bars({k:caas_dict[k] for k in sample_keys}, categories, "Detailed Sampled Refunding Comment Category Distributions")
